@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>G-PLAN • Sign Up</title>
+  <link rel="stylesheet" href="authStyle.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-row">
+      <strong class="title">G-PLAN</strong>
+      <nav class="logsign" aria-label="Account">
+        <a href="login.html">Log In</a>
+        <a href="signup.html" aria-current="page">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth">
+    <div class="container-narrow">
+      <div class="auth-logo"><img src="images/logo.png" alt="G-PLAN logo" /></div>
+      <h1 class="auth-title">SIGN-UP</h1>
+      <p class="auth-subtitle">Welcome to G-PLAN!</p>
+
+      <form class="auth-form" action="#" method="post">
+        <label for="signup-user">Username</label>
+        <input id="signup-user" name="username" type="text" placeholder="Enter username" required />
+
+        <label for="signup-pass">Password</label>
+        <input id="signup-pass" name="password" type="password" placeholder="Enter your password" required />
+
+        <label for="signup-confirm">Confirm Password</label>
+        <input id="signup-confirm" name="confirm" type="password" placeholder="Enter your password" required />
+
+        <div class="auth-action">
+          <button class="btn-submit" type="submit">CREATE ACCOUNT</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="footer-band">
+      <div class="wrap">
+        <span>G-PLAN</span>
+        <a class="home-btn" href="index.html">Home</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
