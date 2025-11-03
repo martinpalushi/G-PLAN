@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>G-PLAN – Account</title>
+
+  <link rel="stylesheet" href="indexStyle.css" />
+  
+  <link rel="stylesheet" href="accountStyle.css" />
+</head>
+<body id="top">
+ 
+  <header class="topbar">
+    <div class="container topbar-row">
+      <strong class="title">G-PLAN</strong>
+      <nav class="logsign">
+        <a href="index.html">Home</a>
+        <a href="majors.html">Browse Majors</a>
+        <a href="minors.html">Browse Minors</a>
+        <a href="login.html">Log In</a>
+        <a href="signup.html">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    
+    <section class="section">
+      <div class="container">
+        <h1 class="section-title">Account</h1>
+        <p style="color:#6b7280;margin:.25rem 0 1rem">Upload or remove your profile picture.</p>
+      </div>
+    </section>
+
+    
+    <section class="section">
+      <div class="container">
+        <div class="pfp-card">
+          <div class="pfp-avatar-wrap">
+            <img id="pfp-avatar" alt="Profile picture" />
+            <div id="pfp-initials" aria-hidden="true">GP</div>
+          </div>
+
+          <div class="pfp-actions">
+            <input id="pfp-file" type="file" accept="image/*" hidden />
+            <button id="pfp-upload" class="btn" type="button">Upload Photo</button>
+            <button id="pfp-remove" class="btn secondary" type="button">Remove Photo</button>
+          </div>
+
+          <p id="pfp-status" class="pfp-status"></p>
+        </div>
+
+        <div class="banner">
+          <span class="banner-title">Unleash Your Full Potential</span>
+          <a class="btn secondary" href="#top">Back To Top</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>G-PLAN</span>
+    </div>
+  </footer>
+
+  <script src="pfp.js"></script>
+</body>
+</html>
