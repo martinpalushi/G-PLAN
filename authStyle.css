@@ -111,7 +111,7 @@ a{
   margin:.65rem 0 .35rem;
 }
 
-.auth-form input{
+.login-info{ /*Changed from auth-form input*/
   width:100%;
   height:40px;
   padding:.6rem .8rem;
@@ -119,6 +119,25 @@ a{
   border:1px solid #e5e7eb;
   background:#fff;
   color:#0b0b0b;
+}
+
+.remember-forgot input{
+  margin:0;
+}
+.remember-forgot{
+  justify-content: space-between;
+  font-weight:0; /*I dont know why, but CSS doesnt allow you to change the 
+                  * font-weight if its already been set, but EVERYTHING 
+                  * ELSE you can. It's frustrating. -Martin*/
+}
+.forgot{
+  float:right;
+}
+.forgot a{
+  color:cadetblue;
+}
+.forgot a:hover{
+  text-decoration: underline;
 }
 
 /* BUTTON */

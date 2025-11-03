@@ -9,7 +9,7 @@
 <body>
   <header class="topbar">
     <div class="container topbar-row">
-      <strong class="title">G-PLAN</strong>
+      <strong class="title" ><a href="index.html">G-PLAN</a></strong>
       <nav class="logsign" aria-label="Account">
         <a href="login.html" aria-current="page">Log In</a>
         <a href="signup.html">Sign Up</a>
@@ -25,11 +25,14 @@
 
       <form class="auth-form" action="#" method="post">
         <label for="login-user">Username</label>
-        <input id="login-user" name="username" type="text" placeholder="Enter username" required />
+        <input class="login-info" id="login-user" name="username" type="text" placeholder="Enter username" required />
 
         <label for="login-pass">Password</label>
-        <input id="login-pass" name="password" type="password" placeholder="Enter your password" required />
-
+        <input class="login-info" id="login-pass" name="password" type="password" placeholder="Enter your password" required />
+        <div class="remember-forgot">
+          <label class="rememberme"><input type=checkbox /> Remember me</label>
+          <label class="forgot"><a href="#">Forgot password?</a></label> <!--Will contain a password reset link/function. -Martin-->
+        </div>
         <div class="auth-action">
           <button class="btn-submit" type="submit">LOG-IN</button>
         </div>
