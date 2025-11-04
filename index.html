@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>G-PLAN - Home</title>
-  <link rel="stylesheet" href="indexStyle.css" />
+  <title>G-PLAN – Home</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body id="top">
   <header class="topbar">
     <div class="container topbar-row">
-      <strong class="title" ><a href="index.html">G-PLAN</a></strong>
+      <strong class="title">G-PLAN</strong>
       <nav class="logsign">
         <a href="login.html">Log In</a>
         <a href="signup.html">Sign Up</a>
@@ -24,13 +24,12 @@
         <div class="intro-text">
           <h1>WELCOME TO G-PLAN</h1>
           <p class="intro-paragraph">
-            Welcome future Engineers and Computer Scientists! Want to make the most out of your
-            college career? Your first step is taking the right classes at the right time...
+            Plan your engineering and computing courses in the right order.
           </p>
           <div class="nav-row">
             <a class="btn" href="index.html">Home</a>
-            <a class="btn" href="major.html">Browse Majors</a>
-            <a class="btn" href="minor.html">Browse Minors</a>
+            <a class="btn" href="majors.html">Browse Majors</a>
+            <a class="btn" href="minors.html">Browse Minors</a>
           </div>
         </div>
       </div>
@@ -41,8 +40,14 @@
       <div class="container">
         <div class="video-card">
           <div class="video-wrap">
-            <img src="images/intro-thumb.jpg" alt="Introducing G-PLAN video thumbnail" />
-            <span class="play"></span>
+            <video 
+                  controls 
+                  poster="images/intro-thumb.jpg" 
+                  width="100%" 
+                  preload="metadata"
+                  style="border-radius: 12px;">
+              <source src="videos/intro.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
       </div>
@@ -51,12 +56,9 @@
     <section class="section">
       <div class="container grid-2">
         <div>
-          <h2 class="section-title">Create an account</h2>
+          <h2>Create an account</h2>
           <p><strong>Why make an account with us?</strong></p>
-          <p>
-            Creating an account with us allows us to store your goals and progress so you can
-            continue where you left off the next time you log in.
-          </p>
+          <p>So we can save your goals and progress.</p>
           <div class="nav-row">
             <a class="btn" href="signup.html">Sign Up</a>
             <a class="btn secondary" href="login.html">Log In</a>
@@ -72,36 +74,33 @@
 
     <section class="section">
       <div class="container">
-        <h2 class="section-title">GET STARTED</h2>
-        <div class="tiles">
+        <h2>Get Started</h2>
+        <div class="tiles three">
           <article class="card">
-            <div class="media badge-video">
-              <img src="images/tutorial-thumb.jpg" alt="Tutorial thumbnail" />
-              <span class="play small"></span>
+            <div class="media">
+              <img src="images/tutorial-thumb.jpg" alt="Tutorial" />
             </div>
             <div class="body">
               <h3>Tutorial</h3>
-              <p>Before you get started, go through the tutorial to learn all our features.</p>
+              <p>Learn the features first.</p>
             </div>
           </article>
-
           <article class="card">
             <div class="media">
               <img src="images/major.jpg" alt="Campus image" />
             </div>
             <div class="body">
               <h3>Declare your major/minor</h3>
-              <p>Browse the many majors available in The School of Engineering and Computer Science.</p>
+              <p>See what’s offered.</p>
             </div>
           </article>
-
           <article class="card">
             <div class="media">
               <img src="images/minor.jpg" alt="Graduation cap" />
             </div>
             <div class="body">
               <h3>Add a major/minor</h3>
-              <p>Interested in expanding your field of knowledge? Add a new major or minor!</p>
+              <p>Expand your path.</p>
             </div>
           </article>
         </div>

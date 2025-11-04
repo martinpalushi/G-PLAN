@@ -4,13 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>G-PLAN – Account</title>
-
-  <link rel="stylesheet" href="indexStyle.css" />
-  
-  <link rel="stylesheet" href="accountStyle.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body id="top">
- 
+  <!-- Top bar -->
   <header class="topbar">
     <div class="container topbar-row">
       <strong class="title">G-PLAN</strong>
@@ -25,38 +22,38 @@
   </header>
 
   <main>
-    
-    <section class="section">
-      <div class="container">
-        <h1 class="section-title">Account</h1>
-        <p style="color:#6b7280;margin:.25rem 0 1rem">Upload or remove your profile picture.</p>
-      </div>
-    </section>
-
-    
-    <section class="section">
-      <div class="container">
-        <div class="pfp-card">
-          <div class="pfp-avatar-wrap">
-            <img id="pfp-avatar" alt="Profile picture" />
-            <div id="pfp-initials" aria-hidden="true">GP</div>
+    <section class="section account-hero">
+      <div class="container account-header">
+        <div class="account-left">
+          <div class="account-avatar">
+            <img id="pfp-header" alt="Profile picture" />
+            <div id="pfp-header-initials" aria-hidden="true">A</div>
           </div>
-
-          <div class="pfp-actions">
-            <input id="pfp-file" type="file" accept="image/*" hidden />
-            <button id="pfp-upload" class="btn" type="button">Upload Photo</button>
-            <button id="pfp-remove" class="btn secondary" type="button">Remove Photo</button>
+          <div>
+            <h1 class="account-name">NAME</h1>
+            <p class="account-meta">
+              Major: <br/>
+              Minor: 
+            </p>
+            <div class="account-actions">
+              <a class="btn" href="index.html">Home</a>
+              <a class="btn" href="majors.html">Browse Majors</a>
+              <a class="btn" href="minors.html">Browse Minors</a>
+              <button class="btn secondary" type="button" id="edit-tab-btn">
+                Edit Account
+              </button>
+            </div>
           </div>
-
-          <p id="pfp-status" class="pfp-status"></p>
-        </div>
-
-        <div class="banner">
-          <span class="banner-title">Unleash Your Full Potential</span>
-          <a class="btn secondary" href="#top">Back To Top</a>
         </div>
       </div>
     </section>
+
+    <div class="container">
+      <div class="banner">
+        <span class="banner-title">Unleash Your Full Potential</span>
+        <a class="btn secondary" href="#top">Back To Top</a>
+      </div>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -65,6 +62,29 @@
     </div>
   </footer>
 
-  <script src="pfp.js"></script>
+<div class="edit-popup" id="editPopup" aria-hidden="true">
+  <div class="edit-popup-content">
+    <button class="edit-close" id="closePopup" type="button" aria-label="Close">&times;</button>
+    <h2 class="section-title">Edit Profile</h2>
+    <p class="muted">Upload or remove your profile picture.</p>
+
+    <div class="pfp-card" style="box-shadow:none; border:none;">
+      <div class="pfp-avatar-wrap">
+        <img id="pfp-modal" alt="Profile picture" />
+        <div id="pfp-modal-initials" aria-hidden="true">A</div>
+      </div>
+
+      <div class="pfp-actions">
+        <input id="pfp-file" type="file" accept="image/*" hidden />
+        <button id="pfp-upload" class="btn" type="button">Upload Photo</button>
+        <button id="pfp-remove" class="btn secondary" type="button">Remove Photo</button>
+      </div>
+
+      <p id="pfp-status" class="pfp-status"></p>
+    </div>
+  </div>
+</div>
+
+<script src="pfp.js"></script>
 </body>
 </html>
