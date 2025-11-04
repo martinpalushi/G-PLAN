@@ -130,4 +130,17 @@ document.addEventListener("DOMContentLoaded", () => {
       removePhoto();
     }
   })();
+  
+  const username = localStorage.getItem("gplan_username");
+  const nameDisplay = document.querySelector(".account-name");
+  const initialsDisplay = document.getElementById("pfp-header-initials");
+  
+  // adds username to profile
+  if (username) {
+    nameDisplay.textContent = username;
+    const initials = username.charAt(0).toUpperCase(); // changes the circle to have first initial
+    initialsDisplay.textContent = initials;
+  } else {
+    nameDisplay.textContent = "Guest";
+  }
 });

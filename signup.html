@@ -12,6 +12,7 @@
     <div class="container topbar-row">
       <strong class="title" ><a href="index.html">G-PLAN</a></strong>
       <nav class="logsign" aria-label="Account">
+        <a href="account.html">Profile</a>
         <a href="login.html">Log In</a>
         <a href="signup.html" aria-current="page">Sign Up</a>
       </nav>
@@ -55,5 +56,26 @@
       </div>
     </footer>
   </div>
+  <script>
+  document.querySelector(".auth-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // stop the form from reloading the page
+
+    const username = document.querySelector("#signup-user").value.trim();
+    const password = document.querySelector("#signup-pass").value;
+    const confirm = document.querySelector("#signup-confirm").value;
+
+    // simple password check
+    if (password !== confirm) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    // saves username
+    localStorage.setItem("gplan_username", username);
+
+    // sends to account page
+    window.location.href = "account.html";
+  });
+  </script>
 </body>
 </html>
