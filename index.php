@@ -1,3 +1,9 @@
+<?php
+session_start();
+$loggedIn = isset($_SESSION['name']);
+$username = $loggedIn ? $_SESSION['name'] : '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +17,13 @@
     <div class="container topbar-row">
       <strong class="title" ><a href="index.html">G-PLAN</a></strong>
       <nav class="logsign">
-        <a href="login.php">Log In</a>
-        <a href="signup.php">Sign Up</a>
+        <?php if ($loggedIn): ?> <!--If the user is logged in, it will display a reference to account.html -->
+          <a href="account.html">Profile</a>
+          <a href="logout.php">Log Out</a>
+        <?php else: ?>
+          <a href="login.php">Log In</a>
+          <a href="signup.php">Sign Up</a>
+        <?php endif; ?>
       </nav>
     </div>
   </header>
@@ -20,13 +31,20 @@
   <main>
     <section class="section intro">
       <div class="container intro-row">
-        <img class="logo" src="images/logo.png" alt="G-PLAN Logo" />
+        <img class="logo" src="images/logo.png" alt="G-PLAN Logo" /> <!--Logo will eventually be replaced by profile photo.-->
         <div class="intro-text">
-          <h1>WELCOME TO G-PLAN</h1>
-          <p class="intro-paragraph">
-            Welcome future Engineers and Computer Scientists! Want to make the most out of your
-            college career? Your first step is taking the right classes at the right time...
-          </p>
+          <?php if ($loggedIn): ?>
+            <h1>WELCOME BACK, <?= htmlspecialchars($username) ?>!</h1>
+            <p class="intro-paragraph">
+              Great to see you again! Ready to continue your progress?
+            </p>
+          <?php else: ?>
+            <h1>WELCOME TO G-PLAN</h1>
+            <p class="intro-paragraph">
+              Welcome future Engineers and Computer Scientists! Want to make the most out of your
+              college career? Your first step is taking the right classes at the right time...
+            </p>
+          <?php endif; ?>
           <div class="nav-row">
             <a class="btn" href="index.html">Home</a>
             <a class="btn" href="major.html">Browse Majors</a>

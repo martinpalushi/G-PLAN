@@ -25,10 +25,10 @@ function showError($error){
 <body>
   <header class="topbar">
     <div class="container topbar-row">
-      <strong class="title" ><a href="index.html">G-PLAN</a></strong>
+      <strong class="title" ><a href="index.php">G-PLAN</a></strong>
       <nav class="logsign" aria-label="Account">
-        <a href="login.html">Log In</a>
-        <a href="signup.html" aria-current="page">Sign Up</a>
+        <a href="login.php">Log In</a>
+        <a href="signup.php" aria-current="page">Sign Up</a>
       </nav>
     </div>
   </header>
@@ -61,7 +61,7 @@ function showError($error){
     <div class="footer-band">
       <div class="wrap">
         <span>G-PLAN</span>
-        <a class="home-btn" href="index.html">Home</a>
+        <a class="home-btn" href="index.php">Home</a>
       </div>
     </div>
   </main>
