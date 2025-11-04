@@ -33,25 +33,59 @@
       </div>
       <div class="container"><div class="hr"></div></div>
     </section>    
-    
+
     <section class="section">
       <div class="container">
-        <div class="tiles four">
-          <article class="card">
-            <div class="media"><img src="images/majors/cyber.jpg" alt="Cybersecurity"></div>
+
+        <div class="card-slider" id="majors-slider">
+          <!-- you can add as many of these as you want -->
+          <article class="card slider-card">
+            <div class="media"><img src="images/cyber.jpg" alt="Cybersecurity"></div>
             <div class="caption">Cybersecurity</div>
           </article>
-          <article class="card">
-            <div class="media"><img src="images/majors/ai.jpg" alt="Artificial Intelligence"></div>
+          <article class="card slider-card">
+            <div class="media"><img src="images/ai.jpg" alt="Artificial Intelligence"></div>
             <div class="caption">Artificial Intelligence</div>
           </article>
-          <article class="card">
-            <div class="media"><img src="images/majors/bio.jpg" alt="Bioengineering"></div>
+          <article class="card slider-card">
+            <div class="media"><img src="images/bioe.jpg" alt="Bioengineering"></div>
             <div class="caption">Bioengineering</div>
           </article>
-          <article class="card">
-            <div class="media"><img src="images/majors/ce.jpg" alt="Computer Engineering"></div>
+          <article class="card slider-card">
+            <div class="media"><img src="images/ce.jpg" alt="Computer Engineering"></div>
             <div class="caption">Computer Engineering</div>
+          </article>
+          <article class="card slider-card">
+            <div class="media"><img src="images/cs.jpg" alt="Computer Science"></div>
+            <div class="caption">Computer Science</div>
+          </article>
+          <article class="card slider-card">
+            <div class="media"><img src="images/ds.jpg" alt="Data Science"></div>
+            <div class="caption">Data Science</div>
+          </article>
+          <article class="card slider-card">
+            <div class="media"><img src="images/ee.jpg" alt="Electrical Engineering"></div>
+            <div class="caption">Electrical Engineering</div>
+          </article>
+          <article class="card slider-card">
+            <div class="media"><img src="images/es.jpg" alt="Engineering Sciences"></div>
+            <div class="caption">Engineering Sciences</div>
+          </article>
+          <article class="card slider-card">
+            <div class="media"><img src="images/ise.jpg" alt="Industrial and Systems Engineering"></div>
+            <div class="caption">Industrial and Systems Engineering</div>
+          </article>
+          <article class="card slider-card">
+            <div class="media"><img src="images/it.jpg" alt="Information Technology"></div>
+            <div class="caption">Information Technology</div>
+          </article>
+          <article class="card slider-card">
+            <div class="media"><img src="images/me.jpg" alt="Mechanical Engineering"></div>
+            <div class="caption">Mechanical Engineering</div>
+          </article>
+          <article class="card slider-card">
+            <div class="media"><img src="images/mre.jpg" alt="Mechatronics and Robotics Engineering"></div>
+            <div class="caption">Mechatronics and Robotics Engineering</div>
           </article>
         </div>
       </div>
@@ -76,5 +110,23 @@
       </div>
     </footer>
   </div>
+
+  <script>
+    // simple slider logic
+    const slider = document.getElementById('majors-slider');
+    const btnPrev = document.getElementById('majors-prev');
+    const btnNext = document.getElementById('majors-next');
+
+    function scrollByCard(dir = 1) {
+      if (!slider) return;
+      // find width of one card
+      const card = slider.querySelector('.slider-card');
+      const amount = card ? card.offsetWidth + 16 : 250; // 16 = gap
+      slider.scrollBy({ left: dir * amount, behavior: 'smooth' });
+    }
+
+    btnPrev && btnPrev.addEventListener('click', () => scrollByCard(-1));
+    btnNext && btnNext.addEventListener('click', () => scrollByCard(1));
+  </script>
 </body>
 </html>
