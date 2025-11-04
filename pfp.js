@@ -1,3 +1,4 @@
+// Profile photo upload/remove with localStorage persistence
 const MAX_BYTES = 5 * 1024 * 1024;
 
 const el = {
@@ -51,8 +52,8 @@ function removePhoto(){
 
 function setStatus(msg){ el.status.textContent = msg; }
 
+// Initialize from storage
 (function init(){
   const saved = localStorage.getItem('gplan.avatar');
   if (saved) showPhoto(saved); else removePhoto();
 })();
-
