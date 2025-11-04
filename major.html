@@ -36,79 +36,147 @@
       <div class="container"><div class="hr"></div></div>
     </section>
     
-    <div class="major-slider">
-  <div class="slide active">
-    <h2>Major 1</h2>
-    <p>Description of Major 1</p>
-    <p>Credits Required: 0</p>
-  </div>
-  <div class="slide">
-    <h2>Major 2</h2>
-    <p>Description of Major 2</p>
-    <p>Credits Required: 0</p>
-  </div>
-  <div class="slide">
-    <h2>Major 3</h2>
-    <p>Description of Major 3</p>
-    <p>Credits Required: 0</p>
+<!-- ====== Interactive Major Image Slider ====== -->
+<div class="major-carousel-container">
+  <h2 class="carousel-title">Select a Major</h2>
+  <div class="major-carousel">
+    <div class="major-slide" onclick="showMajorInfo('Computer Science')">
+      <img src="images/major.jpg" alt="Computer Science">
+      <p>Computer Science</p>
+    </div>
+    <div class="major-slide" onclick="showMajorInfo('Information Technology')">
+      <img src="images/minor.jpg" alt="Information Technology">
+      <p>Information Technology</p>
+    </div>
+    <div class="major-slide" onclick="showMajorInfo('Software Engineering')">
+      <img src="images/account.jpg" alt="Software Engineering">
+      <p>Software Engineering</p>
+    </div>
   </div>
 
-  <div class="slider-buttons">
-    <button onclick="changeSlide(-1)">&#10094; Prev</button>
-    <button onclick="changeSlide(1)">Next &#10095;</button>
+  <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#10094;</button>
+  <button class="carousel-btn next" onclick="moveCarousel(1)">&#10095;</button>
+
+  <div id="major-info" class="major-info">
+    <h3>Select a major above</h3>
+    <p id="major-desc"></p>
+    <p id="major-credits"></p>
   </div>
 </div>
 
 <style>
-  .major-slider {
+  .major-carousel-container {
     width: 80%;
     margin: 40px auto;
     text-align: center;
+    position: relative;
   }
 
-  .slide {
-    display: none;
+  .carousel-title {
+    margin-bottom: 20px;
+    color: #111;
   }
 
-  .slide.active {
-    display: block;
+  .major-carousel {
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
   }
 
-  .slider-buttons {
-    margin-top: 20px;
-  }
-
-  .slider-buttons button {
-    background-color: #b89a35;
-    color: #6b7280;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 5px;
+  .major-slide {
+    min-width: 200px;
+    margin: 0 15px;
+    transition: transform 0.3s ease;
     cursor: pointer;
   }
 
-  .slider-buttons button:hover {
+  .major-slide img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .major-slide p {
+    margin-top: 8px;
+    font-weight: bold;
+  }
+
+  .carousel-btn {
     background-color: #b89a35;
+    border: none;
+    color: #111;
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .carousel-btn.prev {
+    left: 0;
+  }
+
+  .carousel-btn.next {
+    right: 0;
+  }
+
+  .carousel-btn:hover {
+    background-color: #b89a35;
+  }
+
+  .major-info {
+    margin-top: 30px;
+    background: #b89a35;
+    padding: 20px;
+    border-radius: 10px;
   }
 </style>
 
 <script>
-  let currentSlide = 0;
-  const slides = document.querySelectorAll(".slide");
+  let currentPosition = 0;
 
-  function showSlide(index) {
-    slides.forEach(slide => slide.classList.remove("active"));
-    slides[index].classList.add("active");
+  function moveCarousel(direction) {
+    const carousel = document.querySelector(".major-carousel");
+    const slides = document.querySelectorAll(".major-slide");
+    const slideWidth = slides[0].offsetWidth + 30;
+    const maxPosition = -(slideWidth * (slides.length - 3));
+
+    currentPosition += direction * slideWidth;
+    if (currentPosition > 0) currentPosition = 0;
+    if (currentPosition < maxPosition) currentPosition = maxPosition;
+
+    carousel.style.transform = `translateX(${currentPosition}px)`;
   }
 
-  function changeSlide(direction) {
-    currentSlide = (currentSlide + direction + slides.length) % slides.length;
-    showSlide(currentSlide);
-  }
+  function showMajorInfo(major) {
+    const desc = document.getElementById("major-desc");
+    const credits = document.getElementById("major-credits");
+    const info = document.getElementById("major-info");
 
-  showSlide(currentSlide);
+    let data = {
+      "Computer Science": {
+        desc: "Focuses on programming, algorithms, and systems design for software development careers.",
+        credits: "128 Credits Required"
+      },
+      "Information Technology": {
+        desc: "Covers networking, cybersecurity, and IT systems management for enterprise environments.",
+        credits: "124 Credits Required"
+      },
+      "Software Engineering": {
+        desc: "Emphasizes software project management, design principles, and application engineering.",
+        credits: "126 Credits Required"
+      }
+    };
+
+    info.querySelector("h3").innerText = major;
+    desc.innerText = data[major].desc;
+    credits.innerText = data[major].credits;
+  }
 </script>
+
     
     <!-- Majors tiles -->
     <section class="section">
