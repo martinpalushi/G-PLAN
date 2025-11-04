@@ -10,7 +10,7 @@
   <!-- Top bar -->
   <header class="topbar">
     <div class="container topbar-row">
-      <strong class="title"><a href="index.html">G-PLAN</a></strong>
+      <strong class="title">G-PLAN</strong>
       <nav class="logsign">
         <a href="login.html">Log In</a>
         <a href="signup.html">Sign Up</a>
@@ -35,7 +35,81 @@
       </div>
       <div class="container"><div class="hr"></div></div>
     </section>
+    
+    <div class="major-slider">
+  <div class="slide active">
+    <h2>Major 1</h2>
+    <p>Description of Major 1</p>
+    <p>Credits Required: 0</p>
+  </div>
+  <div class="slide">
+    <h2>Major 2</h2>
+    <p>Description of Major 2</p>
+    <p>Credits Required: 0</p>
+  </div>
+  <div class="slide">
+    <h2>Major 3</h2>
+    <p>Description of Major 3</p>
+    <p>Credits Required: 0</p>
+  </div>
 
+  <div class="slider-buttons">
+    <button onclick="changeSlide(-1)">&#10094; Prev</button>
+    <button onclick="changeSlide(1)">Next &#10095;</button>
+  </div>
+</div>
+
+<style>
+  .major-slider {
+    width: 80%;
+    margin: 40px auto;
+    text-align: center;
+  }
+
+  .slide {
+    display: none;
+  }
+
+  .slide.active {
+    display: block;
+  }
+
+  .slider-buttons {
+    margin-top: 20px;
+  }
+
+  .slider-buttons button {
+    background-color: #b89a35;
+    color: #6b7280;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .slider-buttons button:hover {
+    background-color: #b89a35;
+  }
+</style>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll(".slide");
+
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove("active"));
+    slides[index].classList.add("active");
+  }
+
+  function changeSlide(direction) {
+    currentSlide = (currentSlide + direction + slides.length) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  showSlide(currentSlide);
+</script>
+    
     <!-- Majors tiles -->
     <section class="section">
       <div class="container">
