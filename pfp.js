@@ -9,6 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const editBtn = document.getElementById("edit-tab-btn");
   const popup = document.getElementById("editPopup");
   const closePopup = document.getElementById("closePopup");
+  
+  // imports userbase and currentUser
+  const userbase = JSON.parse(localStorage.getItem("userbase"));
+  const currentUser = Object.values(userbase).find(u => u.isLoggedIn);
 
   const el = {
     headerAvatar: document.getElementById("pfp-header"),            // profile picture
@@ -101,8 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function removePhoto() {
-    localStorage.removeItem("gplan.avatar");
-
+    localStorage.removeItem("gplan.avatar"); 
+    // userdata.name("")
     if (el.avatar) {
       el.avatar.src = "";
       el.avatar.style.display = "none";
@@ -131,15 +135,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })();
   
-  const username = localStorage.getItem("gplan_username");
-  const nameDisplay = document.querySelector(".account-name");
-  const initialsDisplay = document.getElementById("pfp-header-initials");
-  
+
   // adds username to profile
-  if (username) {
-    nameDisplay.textContent = username;
+  const nameDisplay = document.querySelector(".account-name");  
+  if (currentUser) {
+    nameDisplay.textContent = currentUser.name;
     const initials = username.charAt(0).toUpperCase(); // changes the circle to have first initial
-    initialsDisplay.textContent = initials;
+    el.headerInitials.textContent = initials;
   } else {
     nameDisplay.textContent = "Guest";
   }
