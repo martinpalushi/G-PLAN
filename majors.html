@@ -4,9 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>G-PLAN • Major Browsing</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="majorsMinors.css" />
+  <style>
+    /* === Slider Layout Fix === */
+    .card-slider {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      scroll-snap-type: x mandatory;
+      padding: 1rem 0;
+      justify-content: flex-start;
+    }
+    .card-slider::-webkit-scrollbar { display: none; }
+    .slider-card {
+      flex: 0 0 auto;
+      width: 280px;
+      scroll-snap-align: start;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .slider-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .slider-card.selected { border: 3px solid #b89a35; }
+
+    /* === 4-Year Plan Layout === */
+    .year-section { margin-bottom: 2rem; }
+    .year-header { text-align: center; font-weight: bold; font-size: 1.3rem; margin-bottom: 0.75rem; }
+    .semesters-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; }
+    .semester-card { background: #fff; border-radius: 8px; border: 1px solid #ddd; padding: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    .semester-card.gold { background-color: #b89a35; color: #fff; }
+    .semester-card h3 { margin-top: 0; font-size: 1.1rem; }
+    .semester-card ul { list-style: none; padding: 0; margin: 0.5rem 0; }
+    .semester-card li { margin: 0.3rem 0; }
+    .semester-card input[type="checkbox"] { margin-right: 0.4rem; }
+    .divider-banner { text-align: center; background-color: #b89a35; color: #fff; font-weight: bold; padding: 0.75rem; border-radius: 6px; margin: 2rem 0 3rem; letter-spacing: 0.5px; }
+  </style>
 </head>
-<body id="top">
+<body>
   <header class="topbar">
     <div class="container topbar-row">
       <strong class="title">G-PLAN</strong>
@@ -23,8 +59,8 @@
       <div class="container hero-row">
         <img class="logo" src="images/logo.png" alt="G-PLAN logo">
         <div>
-          <h1>MAJOR BROWSING</h1>
-          <p class="lead">Look through the majors available!</p>
+          <h1>MAJORS BROWSING</h1>
+          <p class="lead">Select a major to view its 4-Year Plan</p>
           <div class="btn-row">
             <a class="btn" href="index.html">Home</a>
             <a class="btn" href="majors.html">Browse Majors</a>
@@ -33,101 +69,154 @@
         </div>
       </div>
       <div class="container"><div class="hr"></div></div>
-    </section>    
+    </section>
 
     <section class="section">
       <div class="container">
-
         <div class="card-slider" id="majors-slider">
-          <!-- you can add as many of these as you want -->
-          <article class="card slider-card">
-            <div class="media"><img src="images/cyber.jpg" alt="Cybersecurity"></div>
-            <div class="caption">Cybersecurity</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ai.jpg" alt="Artificial Intelligence"></div>
-            <div class="caption">Artificial Intelligence</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/bioe.jpg" alt="Bioengineering"></div>
-            <div class="caption">Bioengineering</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ce.jpg" alt="Computer Engineering"></div>
-            <div class="caption">Computer Engineering</div>
-          </article>
-          <article class="card slider-card">
+          <article class="card slider-card major-card" data-major="computer-science">
             <div class="media"><img src="images/cs.jpg" alt="Computer Science"></div>
             <div class="caption">Computer Science</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ds.jpg" alt="Data Science"></div>
-            <div class="caption">Data Science</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ee.jpg" alt="Electrical Engineering"></div>
-            <div class="caption">Electrical Engineering</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/es.jpg" alt="Engineering Sciences"></div>
-            <div class="caption">Engineering Sciences</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ise.jpg" alt="Industrial and Systems Engineering"></div>
-            <div class="caption">Industrial and Systems Engineering</div>
-          </article>
-          <article class="card slider-card">
+          <article class="card slider-card major-card" data-major="information-technology">
             <div class="media"><img src="images/it.jpg" alt="Information Technology"></div>
             <div class="caption">Information Technology</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/me.jpg" alt="Mechanical Engineering"></div>
-            <div class="caption">Mechanical Engineering</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/mre.jpg" alt="Mechatronics and Robotics Engineering"></div>
-            <div class="caption">Mechatronics and Robotics Engineering</div>
+          <article class="card slider-card major-card" data-major="cybersecurity">
+            <div class="media"><img src="images/cyber.jpg" alt="Cybersecurity"></div>
+            <div class="caption">Cybersecurity</div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section tight">
+    <div class="container"><div class="divider-banner">4-YEAR PLAN</div></div>
+
+    <section class="section" id="fourYearPlanSection">
       <div class="container">
-        <div class="crest"></div>
+        <h2 id="planMajorName" class="center">Select a major to build a 4-year plan</h2>
+        <p id="planMajorDesc" class="intro-paragraph"></p>
+        <p><strong>Total Credits:</strong> <span id="planTotalCredits">0</span></p>
+        <div id="planYears"></div>
+      </div>
+    </section>
+
+    <section class="banner">
+      <div class="container center">
+        <h2>Unleash Your Full Potential</h2>
       </div>
     </section>
   </main>
-  
-  <div class="container">
-    <div class="banner">
-      <span class="banner-title">Unleash Your Full Potential</span>
-      <a class="btn secondary" href="#top">Back To Top</a>
-    </div>
-   
-    <footer class="site-footer">
-      <div class="container footer-row">
-        <span>G-PLAN</span>
-      </div>
-    </footer>
-  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-row"><span>G-PLAN</span></div>
+  </footer>
 
   <script>
-    // simple slider logic
-    const slider = document.getElementById('majors-slider');
-    const btnPrev = document.getElementById('majors-prev');
-    const btnNext = document.getElementById('majors-next');
+    (function() {
+      const majorsData = {
+        "computer-science": {
+          name: "Computer Science (BS)",
+          description: "Focus on algorithms, systems, AI, and software engineering.",
+          requiredCredits: 120,
+          years: [
+            { title: "Freshman Year", fall: [
+              { code: "CSCI 1200", title: "Intro to Computing", credits: 4 },
+              { code: "MATH 1210", title: "Calculus I", credits: 4 },
+              { code: "ENGL 1500", title: "Composition I", credits: 3 }
+            ], winter: [
+              { code: "CSCI 2200", title: "Data Structures", credits: 4 },
+              { code: "MATH 1220", title: "Calculus II", credits: 4 },
+              { code: "PHYS 2100", title: "Physics I", credits: 4 }
+            ] },
+            { title: "Sophomore Year", fall: [
+              { code: "CSCI 2300", title: "Computer Architecture", credits: 4 },
+              { code: "MATH 2400", title: "Discrete Math", credits: 3 },
+              { code: "STAT 2000", title: "Statistics", credits: 3 }
+            ], winter: [
+              { code: "CSCI 3100", title: "Algorithms", credits: 4 },
+              { code: "CSCI 3200", title: "Operating Systems", credits: 4 },
+              { code: "HUMN 2100", title: "Humanities Elective", credits: 3 }
+            ] },
+            { title: "Junior Year", fall: [
+              { code: "CSCI 3300", title: "Databases", credits: 3 },
+              { code: "CSCI 3400", title: "Software Engineering", credits: 3 },
+              { code: "ELEC 2000", title: "Circuits", credits: 3 }
+            ], winter: [
+              { code: "CSCI 4100", title: "AI & ML", credits: 3 },
+              { code: "CSCI 4200", title: "Networks", credits: 3 },
+              { code: "TECH 3000", title: "Technical Elective", credits: 3 }
+            ] },
+            { title: "Senior Year", fall: [
+              { code: "CSCI 4300", title: "Capstone I", credits: 3 },
+              { code: "CSCI 4400", title: "Security", credits: 3 },
+              { code: "SOCI 2300", title: "Social Science Elective", credits: 3 }
+            ], winter: [
+              { code: "CSCI 4310", title: "Capstone II", credits: 3 },
+              { code: "CSCI 4500", title: "Advanced Topics", credits: 3 },
+              { code: "FREE 1000", title: "Free Elective", credits: 3 }
+            ] }
+          ]
+        }
+      };
 
-    function scrollByCard(dir = 1) {
-      if (!slider) return;
-      // find width of one card
-      const card = slider.querySelector('.slider-card');
-      const amount = card ? card.offsetWidth + 16 : 250; // 16 = gap
-      slider.scrollBy({ left: dir * amount, behavior: 'smooth' });
-    }
+      const planMajorName = document.getElementById('planMajorName');
+      const planMajorDesc = document.getElementById('planMajorDesc');
+      const planTotalCredits = document.getElementById('planTotalCredits');
+      const planYears = document.getElementById('planYears');
 
-    btnPrev && btnPrev.addEventListener('click', () => scrollByCard(-1));
-    btnNext && btnNext.addEventListener('click', () => scrollByCard(1));
+      function renderMajorPlan(majorSlug) {
+        const major = majorsData[majorSlug];
+        if (!major) return;
+        planMajorName.textContent = major.name;
+        planMajorDesc.textContent = major.description;
+        planYears.innerHTML = '';
+        let totalCredits = 0;
+        major.years.forEach(year => {
+          const yearDiv = document.createElement('div');
+          yearDiv.className = 'year-section';
+          const yearHeader = document.createElement('div');
+          yearHeader.className = 'year-header';
+          yearHeader.textContent = year.title;
+          yearDiv.appendChild(yearHeader);
+          const row = document.createElement('div');
+          row.className = 'semesters-row';
+          ['fall','winter'].forEach(semName => {
+            const sem = year[semName];
+            if (!sem) return;
+            const semDiv = document.createElement('div');
+            semDiv.className = 'semester-card' + (semName==='fall' ? ' gold' : '');
+            const h3 = document.createElement('h3');
+            h3.textContent = semName.charAt(0).toUpperCase()+semName.slice(1)+' Semester';
+            semDiv.appendChild(h3);
+            const ul = document.createElement('ul');
+            let semCredits = 0;
+            sem.forEach(course => {
+              const li = document.createElement('li');
+              li.innerHTML = `<label><input type='checkbox'> <strong>${course.code}</strong> - ${course.title} (${course.credits} cr)</label>`;
+              ul.appendChild(li);
+              semCredits += course.credits;
+            });
+            const p = document.createElement('p');
+            p.textContent = `Total Credits: ${semCredits}`;
+            semDiv.append(ul,p);
+            row.appendChild(semDiv);
+            totalCredits += semCredits;
+          });
+          yearDiv.appendChild(row);
+          planYears.appendChild(yearDiv);
+        });
+        planTotalCredits.textContent = totalCredits;
+      }
+
+      document.querySelectorAll('.major-card[data-major]').forEach(card=>{
+        card.addEventListener('click',()=>{
+          document.querySelectorAll('.major-card').forEach(c=>c.classList.remove('selected'));
+          card.classList.add('selected');
+          renderMajorPlan(card.dataset.major);
+        });
+      });
+    })();
   </script>
 </body>
 </html>
