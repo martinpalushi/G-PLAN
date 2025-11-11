@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,13 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>G-PLAN • Sign Up</title>
   <link rel="stylesheet" href="style.css" />
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("gplan.darkmode") === "true") {
+        document.body.classList.add("dark-mode");
+      }
+    });
+  </script>
 </head>
 <body>
   <header class="topbar">
     <div class="container topbar-row">
-      <strong class="title" ><a href="index.html">G-PLAN</a></strong>
-      <nav class="logsign" aria-label="Account">
-        <a href="account.html">Profile</a>
+      <strong class="title"><a href="index.html">G-PLAN</a></strong>
+      <nav class="logsign">
         <a href="login.html">Log In</a>
         <a href="signup.html" aria-current="page">Sign Up</a>
       </nav>
@@ -21,22 +26,26 @@
 
   <main class="auth">
     <div class="container-narrow">
-      <div class="auth-logo"><img src="images/logo.png" alt="G-PLAN logo" /></div>
+      <div class="auth-logo">
+        <img src="images/logo.png" alt="G-PLAN logo" />
+      </div>
       <h1 class="auth-title">SIGN-UP</h1>
       <p class="auth-subtitle">Welcome to G-PLAN!</p>
 
       <form class="auth-form" action="#" method="post">
         <label for="signup-user">Username</label>
-        <input class="login-info" id="signup-user" name="username" type="text" placeholder="Enter username" required />
+        <input id="signup-user" name="username" class="login-info" type="text" placeholder="Enter username" required />
 
         <label for="signup-pass">Password</label>
-        <input class="login-info" id="signup-pass" name="password" type="password" placeholder="Enter your password" required />
+        <input id="signup-pass" name="password" class="login-info" type="password" placeholder="Enter your password" required />
 
         <label for="signup-confirm">Confirm Password</label>
-        <input class="login-info" id="signup-confirm" name="confirm" type="password" placeholder="Enter your password" required />
+        <input id="signup-confirm" name="confirm" class="login-info" type="password" placeholder="Re-enter your password" required />
+
         <div class="remember-forgot">
-          <label class="rememberme"><input type=checkbox name="remember"/> Remember me</label>
+          <label><input type="checkbox" class="check" /> Remember me</label>
         </div>
+
         <div class="auth-action">
           <button class="btn-submit" type="submit">CREATE ACCOUNT</button>
         </div>
@@ -44,19 +53,19 @@
     </div>
   </main>
 
-  <div class="container">
-    <div class="banner">
-      <span class="banner-title">Unleash Your Full Potential</span>
-      <a class="btn secondary" href="#top">Back To Top</a>
-    </div>
-   
-    <footer class="site-footer">
-      <div class="container footer-row">
-        <span>G-PLAN</span>
+  <section class="section">
+    <div class="container">
+      <div class="banner">
+        <span class="banner-title">Unleash Your Full Potential</span>
+        <a class="btn secondary" href="#top">Back To Top</a>
       </div>
-    </footer>
-  </div>
-  <script src="userdata.js"></script>
-  <script src="loginSignup.js"></script>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>G-PLAN</span>
+    </div>
+  </footer>
 </body>
 </html>
