@@ -5,13 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>G-PLAN • Major Browsing</title>
   <link rel="stylesheet" href="style.css" />
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("gplan.darkmode") === "true") {
+        document.body.classList.add("dark-mode");
+      }
+    });
+  </script>
 </head>
+
 <body id="top">
   <header class="topbar">
     <div class="container topbar-row">
-      <strong class="title">G-PLAN</strong>
+      <strong class="title"><a href="index.html">G-PLAN</a></strong>
       <nav class="logsign">
-        <a href="account.html">Profile</a>
         <a href="login.html">Log In</a>
         <a href="signup.html">Sign Up</a>
       </nav>
@@ -21,10 +28,10 @@
   <main>
     <section class="section hero">
       <div class="container hero-row">
-        <img class="logo" src="images/logo.png" alt="G-PLAN logo">
+        <img class="logo" src="images/logo.png" alt="G-PLAN logo" />
         <div>
-          <h1>MAJOR BROWSING</h1>
-          <p class="lead">Look through the majors available!</p>
+          <h1>MAJORS BROWSING</h1>
+          <p class="lead">Select a major to view its 4-Year Plan</p>
           <div class="btn-row">
             <a class="btn" href="index.html">Home</a>
             <a class="btn" href="majors.html">Browse Majors</a>
@@ -33,101 +40,106 @@
         </div>
       </div>
       <div class="container"><div class="hr"></div></div>
-    </section>    
+    </section>
 
     <section class="section">
       <div class="container">
-
-        <div class="card-slider" id="majors-slider">
-          <!-- you can add as many of these as you want -->
-          <article class="card slider-card">
-            <div class="media"><img src="images/cyber.jpg" alt="Cybersecurity"></div>
+        <div class="card-slider major-card">
+          <article class="card slider-card major-card" data-major="cybersecurity">
+            <div class="media"><img src="images/cyber.jpg" alt="Cybersecurity" /></div>
             <div class="caption">Cybersecurity</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ai.jpg" alt="Artificial Intelligence"></div>
+          <article class="card slider-card major-card" data-major="ai">
+            <div class="media"><img src="images/ai.jpg" alt="Artificial Intelligence" /></div>
             <div class="caption">Artificial Intelligence</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/bioe.jpg" alt="Bioengineering"></div>
+          <article class="card slider-card major-card" data-major="bioengineering">
+            <div class="media"><img src="images/bioe.jpg" alt="Bioengineering" /></div>
             <div class="caption">Bioengineering</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ce.jpg" alt="Computer Engineering"></div>
+          <article class="card slider-card major-card" data-major="ce">
+            <div class="media"><img src="images/ce.jpg" alt="Computer Engineering" /></div>
             <div class="caption">Computer Engineering</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/cs.jpg" alt="Computer Science"></div>
+          <article class="card slider-card major-card" data-major="computer-science">
+            <div class="media"><img src="images/cs.jpg" alt="Computer Science" /></div>
             <div class="caption">Computer Science</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ds.jpg" alt="Data Science"></div>
+          <article class="card slider-card major-card" data-major="ds">
+            <div class="media"><img src="images/ds.jpg" alt="Data Science" /></div>
             <div class="caption">Data Science</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ee.jpg" alt="Electrical Engineering"></div>
+          <article class="card slider-card major-card" data-major="ee">
+            <div class="media"><img src="images/ee.jpg" alt="Electrical Engineering" /></div>
             <div class="caption">Electrical Engineering</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/es.jpg" alt="Engineering Sciences"></div>
+          <article class="card slider-card major-card" data-major="es">
+            <div class="media"><img src="images/es.jpg" alt="Engineering Sciences" /></div>
             <div class="caption">Engineering Sciences</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ise.jpg" alt="Industrial and Systems Engineering"></div>
+          <article class="card slider-card major-card" data-major="ise">
+            <div class="media"><img src="images/ise.jpg" alt="Industrial and Systems Engineering" /></div>
             <div class="caption">Industrial and Systems Engineering</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/it.jpg" alt="Information Technology"></div>
+          <article class="card slider-card major-card" data-major="it">
+            <div class="media"><img src="images/it.jpg" alt="Information Technology" /></div>
             <div class="caption">Information Technology</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/me.jpg" alt="Mechanical Engineering"></div>
-            <div class="caption">Mechanical Engineering</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/mre.jpg" alt="Mechatronics and Robotics Engineering"></div>
+          <article class="card slider-card major-card" data-major="mre">
+            <div class="media"><img src="images/mre.jpg" alt="Mechatronics and Robotics Engineering" /></div>
             <div class="caption">Mechatronics and Robotics Engineering</div>
+          </article>
+          <article class="card slider-card major-card" data-major="mechanical-engineering">
+            <div class="media"><img src="images/me.jpg" alt="Mechanical Engineering" /></div>
+            <div class="caption">Mechanical Engineering</div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section tight">
+    <div class="container">
+      <div class="divider-banner">4-YEAR PLAN</div>
+    </div>
+
+    <section class="section">
       <div class="container">
-        <div class="crest"></div>
+        <h2 id="planMajorName">Select a major to begin...</h2>
+        <p id="planMajorDesc" class="intro-paragraph"></p>
+        <p>
+          <strong>Total Credits:</strong> <span id="planTotalCredits">0</span>
+          <button id="undoBtn" type="button" class="undo-btn">Undo</button>
+        </p>
+        <div id="planYears"></div>
       </div>
     </section>
   </main>
-  
-  <div class="container">
-    <div class="banner">
-      <span class="banner-title">Unleash Your Full Potential</span>
-      <a class="btn secondary" href="#top">Back To Top</a>
+
+  <div id="courseModal" class="modal">
+    <div class="modal-content">
+      <span id="courseModalClose" class="close-btn">&times;</span>
+      <h3 id="modalCourseCode"></h3>
+      <p id="modalCourseTitle"></p>
+      <p id="modalCourseCredits"></p>
+      <p id="modalCourseDesc"></p>
     </div>
-   
-    <footer class="site-footer">
-      <div class="container footer-row">
-        <span>G-PLAN</span>
-      </div>
-    </footer>
   </div>
 
-  <script>
-    // simple slider logic
-    const slider = document.getElementById('majors-slider');
-    const btnPrev = document.getElementById('majors-prev');
-    const btnNext = document.getElementById('majors-next');
+  <section class="section">
+    <div class="container">
+      <div class="banner">
+        <span class="banner-title">Unleash Your Full Potential</span>
+        <a class="btn secondary" href="#top">Back To Top</a>
+      </div>
+    </div>
+  </section>
 
-    function scrollByCard(dir = 1) {
-      if (!slider) return;
-      // find width of one card
-      const card = slider.querySelector('.slider-card');
-      const amount = card ? card.offsetWidth + 16 : 250; // 16 = gap
-      slider.scrollBy({ left: dir * amount, behavior: 'smooth' });
-    }
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>G-PLAN</span>
+    </div>
+  </footer>
 
-    btnPrev && btnPrev.addEventListener('click', () => scrollByCard(-1));
-    btnNext && btnNext.addEventListener('click', () => scrollByCard(1));
-  </script>
+  <script src="majorData.js"></script>
+  <script src="major.js"></script>
 </body>
 </html>
