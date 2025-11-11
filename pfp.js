@@ -9,10 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const editBtn = document.getElementById("edit-tab-btn");
   const popup = document.getElementById("editPopup");
   const closePopup = document.getElementById("closePopup");
-  
-  // imports userbase and currentUser
-  const userbase = JSON.parse(localStorage.getItem("userbase"));
-  const currentUser = Object.values(userbase).find(u => u.isLoggedIn);
 
   const el = {
     headerAvatar: document.getElementById("pfp-header"),            // profile picture
@@ -105,8 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function removePhoto() {
-    localStorage.removeItem("gplan.avatar"); 
-    // userdata.name("")
+    localStorage.removeItem("gplan.avatar");
+
     if (el.avatar) {
       el.avatar.src = "";
       el.avatar.style.display = "none";
@@ -134,15 +130,26 @@ document.addEventListener("DOMContentLoaded", () => {
       removePhoto();
     }
   })();
-  
+});
 
-  // adds username to profile
-  const nameDisplay = document.querySelector(".account-name");  
-  if (currentUser) {
-    nameDisplay.textContent = currentUser.name;
-    const initials = username.charAt(0).toUpperCase(); // changes the circle to have first initial
-    el.headerInitials.textContent = initials;
-  } else {
-    nameDisplay.textContent = "Guest";
+// Dark Mode
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("darkModeSwitch");
+  const isDark = localStorage.getItem("gplan.darkmode") === "true";
+
+  // Apply dark mode if saved
+  if (isDark) {
+    document.body.classList.add("dark-mode");
+    toggle.checked = true;
   }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      document.body.classList.add("dark-mode");
+      localStorage.setItem("gplan.darkmode", "true");
+    } else {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("gplan.darkmode", "false");
+    }
+  });
 });
