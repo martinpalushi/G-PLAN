@@ -42,59 +42,80 @@
     </section>
 
     <section class="section">
-      <div class="container">
-        <div class="card-slider" id="majors-slider">
-          <article class="card slider-card">
-            <div class="media"><img src="images/cyber.jpg" alt="Cybersecurity" /></div>
-            <div class="caption">Cybersecurity</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ai.jpg" alt="Artificial Intelligence" /></div>
-            <div class="caption">Artificial Intelligence</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/bioe.jpg" alt="Bioengineering" /></div>
-            <div class="caption">Bioengineering</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ce.jpg" alt="Computer Engineering" /></div>
-            <div class="caption">Computer Engineering</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/cs.jpg" alt="Computer Science" /></div>
-            <div class="caption">Computer Science</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ds.jpg" alt="Data Science" /></div>
-            <div class="caption">Data Science</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ee.jpg" alt="Electrical Engineering" /></div>
-            <div class="caption">Electrical Engineering</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/es.jpg" alt="Engineering Sciences" /></div>
-            <div class="caption">Engineering Sciences</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/ise.jpg" alt="Industrial and Systems Engineering" /></div>
-            <div class="caption">Industrial and Systems Engineering</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/it.jpg" alt="Information Technology" /></div>
-            <div class="caption">Information Technology</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/me.jpg" alt="Mechanical Engineering" /></div>
-            <div class="caption">Mechanical Engineering</div>
-          </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/mre.jpg" alt="Mechatronics and Robotics Engineering" /></div>
-            <div class="caption">Mechatronics and Robotics Engineering</div>
-          </article>
-        </div>
-      </div>
-    </section>
+  <div class="container">
+    <div class="card-slider" id="majors-slider">
+      <article class="card slider-card" data-minor="cybersecurity">
+        <div class="media"><img src="images/cyber.jpg" alt="Cybersecurity" /></div>
+        <div class="caption">Cybersecurity</div>
+      </article>
+
+      <article class="card slider-card" data-minor="artificial-intelligence">
+        <div class="media"><img src="images/ai.jpg" alt="Artificial Intelligence" /></div>
+        <div class="caption">Artificial Intelligence</div>
+      </article>
+
+      <article class="card slider-card" data-minor="bioengineering">
+        <div class="media"><img src="images/bioe.jpg" alt="Bioengineering" /></div>
+        <div class="caption">Bioengineering</div>
+      </article>
+
+      <article class="card slider-card" data-minor="computer-engineering">
+        <div class="media"><img src="images/ce.jpg" alt="Computer Engineering" /></div>
+        <div class="caption">Computer Engineering</div>
+      </article>
+
+      <article class="card slider-card" data-minor="computer-science">
+        <div class="media"><img src="images/cs.jpg" alt="Computer Science" /></div>
+        <div class="caption">Computer Science</div>
+      </article>
+
+      <article class="card slider-card" data-minor="data-science">
+        <div class="media"><img src="images/ds.jpg" alt="Data Science" /></div>
+        <div class="caption">Data Science</div>
+      </article>
+
+      <article class="card slider-card" data-minor="electrical-engineering">
+        <div class="media"><img src="images/ee.jpg" alt="Electrical Engineering" /></div>
+        <div class="caption">Electrical Engineering</div>
+      </article>
+
+      <article class="card slider-card" data-minor="engineering-sciences">
+        <div class="media"><img src="images/es.jpg" alt="Engineering Sciences" /></div>
+        <div class="caption">Engineering Sciences</div>
+      </article>
+
+      <article class="card slider-card" data-minor="industrial-and-systems-engineering">
+        <div class="media"><img src="images/ise.jpg" alt="Industrial and Systems Engineering" /></div>
+        <div class="caption">Industrial and Systems Engineering</div>
+      </article>
+
+      <article class="card slider-card" data-minor="information-technology">
+        <div class="media"><img src="images/it.jpg" alt="Information Technology" /></div>
+        <div class="caption">Information Technology</div>
+      </article>
+
+      <article class="card slider-card" data-minor="mechanical-engineering">
+        <div class="media"><img src="images/me.jpg" alt="Mechanical Engineering" /></div>
+        <div class="caption">Mechanical Engineering</div>
+      </article>
+
+      <article class="card slider-card" data-minor="mechatronics-and-robotics-engineering">
+        <div class="media"><img src="images/mre.jpg" alt="Mechatronics and Robotics Engineering" /></div>
+        <div class="caption">Mechatronics and Robotics Engineering</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+    <section class="section">
+  <div class="container">
+    <h2>Major/Minor Overlap</h2>
+    <p id="mm-picked">Select a major (in Majors page) and then click a minor.</p>
+
+    <div id="overlapResults"></div>
+  </div>
+</section>
+
   </main>
 
   <section class="section">
@@ -111,5 +132,10 @@
       <span>G-PLAN</span>
     </div>
   </footer>
+  <script src="majorData.js"></script>
+<script src="minorsData.js"></script>
+<script src="overlap.js"></script>
+
+
 </body>
 </html>

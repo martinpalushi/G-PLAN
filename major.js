@@ -1,4 +1,3 @@
-// References elements in the HTML
 (function () {
   const planMajorName = document.getElementById("planMajorName");
   const planMajorDesc = document.getElementById("planMajorDesc");
@@ -8,28 +7,21 @@
   const courseModal = document.getElementById("courseModal");
   const courseModalClose = document.getElementById("courseModalClose");
 
-  //  Keeps track of changes
+
   const historyStack = [];
-  // Keeps track of the courses that are checked off
   let completedCourses = new Set();
-  // Records the information for the course being moved
   let draggedCourseLi = null;
-  // Limits to 5 courses per semester
   const MAX_PER_SEM = 5;
 
-  // Call before the changes are made
-  // Holds the current HTML and the list of completed courses
+  
   function saveSnapshot() {
     historyStack.push({
       html: planYears.innerHTML,
       completed: [...completedCourses],
     });
-    // Prevents the stack from getting too big
     if (historyStack.length > 50) historyStack.shift();
   }
 
-  // If there is nothing to undo, no changes are made.
-  // Otherwise, the last snapshot is returned. 
   function restoreSnapshot() {
     if (!historyStack.length) return;
     const { html, completed } = historyStack.pop();
@@ -39,9 +31,8 @@
     enhanceCurrentPlanDOM();
     recomputeTotalCredits();
   }
-  undoBtn.addEventListener("click", restoreSnapshot);
-    
-  // Retrieves and displays the course information
+  if (undoBtn) undoBtn.addEventListener("click", restoreSnapshot);
+
   function openCourseModal(course) {
     document.getElementById("modalCourseCode").textContent = course.code;
     document.getElementById("modalCourseTitle").textContent = course.title;
@@ -49,19 +40,19 @@
     document.getElementById("modalCourseDesc").textContent = course.description || "No detailed description available.";
     courseModal.style.display = "flex";
   }
-  courseModalClose.addEventListener("click", () => (courseModal.style.display = "none"));
+  if (courseModalClose) {
+    courseModalClose.addEventListener("click", () => (courseModal.style.display = "none"));
+  }
   window.addEventListener("click", e => {
     if (e.target === courseModal) courseModal.style.display = "none";
   });
 
-  // Adds up all the data credits
   function recomputeTotalCredits() {
     let total = 0;
     planYears.querySelectorAll("li[data-credits]").forEach(li => (total += +li.dataset.credits));
     planTotalCredits.textContent = total;
   }
 
-  // Adds up all the semester credits
   function recomputeSemesterCredits(card) {
     const p = card.querySelector("p");
     let sum = 0;
@@ -69,10 +60,8 @@
     if (p) p.textContent = `Total Credits: ${sum}`;
   }
 
-  // Counts the amount of courses and prevents it from surpassing 5
   const getSemesterCourseCount = card => card.querySelectorAll("li[data-course-code]").length;
 
-  // 
   function findCourseDataByCode(code) {
     for (const majorKey in majorsData) {
       const major = majorsData[majorKey];
@@ -88,7 +77,6 @@
     return null;
   }
 
-  // Shifts the courses up as they are moved/completed
   function shiftPlanForward(fromCard) {
     const semesters = [...planYears.querySelectorAll(".semester-card")];
     const start = semesters.indexOf(fromCard);
@@ -109,7 +97,6 @@
     recomputeTotalCredits();
   }
 
-  // Allows users to drag courses
   function makeCourseDraggable(li) {
     li.draggable = true;
     li.addEventListener("dragstart", e => {
@@ -124,7 +111,6 @@
     });
   }
 
-  // Allows users to drop courses into different semesters
   function enableSemesterDrop(card) {
     card.addEventListener("dragover", e => {
       if (!draggedCourseLi) return;
@@ -155,16 +141,23 @@
     });
   }
 
-  // Adds the drag/drop feature
   function enhanceCurrentPlanDOM() {
     planYears.querySelectorAll("li[data-course-code]").forEach(makeCourseDraggable);
     planYears.querySelectorAll(".semester-card").forEach(enableSemesterDrop);
   }
 
-  // Builds the plan
+ 
   function renderMajorPlan(slug) {
     const major = majorsData[slug];
-    if (!major) return;
+    if (!major) {
+      // Friendly fallback
+      const name = slug || "Selected Major";
+      planMajorName.textContent = `${name} (plan coming soon)`;
+      planMajorDesc.textContent = "";
+      planYears.innerHTML = "";
+      planTotalCredits.textContent = "0";
+      return;
+    }
 
     historyStack.length = 0;
     completedCourses = new Set();
@@ -232,13 +225,40 @@
     enhanceCurrentPlanDOM();
   }
 
+
+  const STORAGE_KEY = "selectedMajorSlug"; // use this ONE key everywhere
+
+  function selectMajor(slug) {
+  
+  localStorage.setItem("selectedMajorSlug", slug);
+  localStorage.setItem("gplan.selectedMajor", slug); // ← legacy shim
+
+  
+  document.querySelectorAll(".major-card").forEach(c => c.classList.remove("selected"));
+  const card = document.querySelector(`.major-card[data-major="${slug}"]`);
+  if (card) card.classList.add("selected");
+
+ 
+  renderMajorPlan(slug);
+}
+
+
+  
   document.querySelectorAll(".major-card[data-major]").forEach(card => {
     card.addEventListener("click", () => {
-      document.querySelectorAll(".major-card").forEach(c => c.classList.remove("selected"));
-      card.classList.add("selected");
-      renderMajorPlan(card.dataset.major);
+      const slug = card.dataset.major;
+      selectMajor(slug);
     });
   });
+
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && majorsData[saved]) {
+      selectMajor(saved);
+    }
+  });
+
 
   document.addEventListener("click", e => {
     if (e.target.matches('input[type="checkbox"].course-check')) return;
@@ -249,6 +269,7 @@
     const course = findCourseDataByCode(li.dataset.courseCode);
     if (course) openCourseModal(course);
   });
+
 
   document.addEventListener("change", e => {
     if (!e.target.matches('input[type="checkbox"].course-check')) return;
