@@ -109,7 +109,6 @@ a {
   flex-wrap: wrap;
   margin-top: .25rem;
 }
-
 /* INDEX */
 .hero,
 .intro {
@@ -137,7 +136,7 @@ a {
 .intro-paragraph,
 .lead {
   color: #6b7280;
-  max-width: 70ch;
+  max-width: 100ch;
   margin: .4rem 0 .9rem;
 }
 
@@ -529,7 +528,6 @@ a {
 }
 
 /* MAJOR/MINOR SLIDER */
-
 .card-slider {
   display: flex;
   gap: 1rem;
@@ -579,3 +577,346 @@ a {
   align-items: center;
   justify-content: center;
 }
+
+/* BANNER & FOOTER */
+.banner {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  padding: 1.1rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.site-footer {
+  padding: 2rem 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* 4-YEAR PLAN LAYOUT */
+.year-section { margin-bottom: 2rem; }
+.year-header {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+}
+.semesters-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+.semester-card {
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  min-height: 120px;
+}
+.semester-card.gold {
+  background-color: #b89a35;
+  color: #fff;
+}
+.semester-card h3 { margin-top: 0; font-size: 1.1rem; }
+.semester-card ul { list-style: none; padding: 0; margin: 0.5rem 0; }
+.semester-card li {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  margin: 0.3rem 0;
+}
+.semester-card input[type="checkbox"] { margin-right: 0.4rem; }
+.divider-banner {
+  text-align: center;
+  background-color: #b89a35;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin: 2rem 0 3rem;
+  letter-spacing: 0.5px;
+}
+.course-info { cursor: pointer; }
+
+/* Course Info Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  max-width: 480px;
+  width: min(92%, 480px);
+  padding: 1.5rem;
+  text-align: left;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  position: relative;
+}
+.close-btn {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #666;
+}
+
+/* Undo button */
+.undo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  margin-left: 1rem;
+  padding: .3rem .7rem;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: .8rem;
+}
+.undo-btn:hover {
+  background: #e5e7eb;
+}
+
+/* Drag styles */
+.semester-card li.dragging {
+  opacity: 0.5;
+}
+
+
+/* Dark Mode */
+/* === DARK MODE === */
+body.dark-mode .hero{
+  background: #1e1e1e;
+}
+
+body.dark-mode .page-hero {
+  background: #1e1e1e;
+}
+
+body.dark-mode .page-hero-title {
+  color: #fff;
+}
+
+body.dark-mode .page-hero-text {
+  color: #d1d5d5;
+}
+
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #e5e5e5;
+}
+
+/* --- Top Bar --- */
+body.dark-mode .topbar {
+  background-color: #2b2b2b;
+  color: #f9f9f9;
+  border-bottom: 1px solid #444;
+}
+body.dark-mode .logsign a {
+  color: #e5e5e5;
+}
+body.dark-mode .logsign a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* --- Buttons --- */
+body.dark-mode .btn {
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
+}
+body.dark-mode .btn:hover {
+  background-color: #444;
+}
+body.dark-mode .btn.secondary {
+  background-color: #444;
+  color: #fff;
+  border-color: #666;
+}
+body.dark-mode .btn.secondary:hover {
+  background-color: #555;
+}
+
+/* --- Cards --- */
+body.dark-mode .card {
+  background-color: #2b2b2b;
+  border-color: #444;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+body.dark-mode .caption {
+  color: #f1f1f1;
+}
+
+/* --- Account Section --- */
+body.dark-mode .account-header {
+  border-bottom-color: #555;
+}
+body.dark-mode .account-avatar {
+  background-color: #444;
+}
+body.dark-mode #pfp-header-initials {
+  color: #ddd;
+}
+body.dark-mode .account-meta {
+  color: #bbb;
+}
+
+/* --- Edit Popup --- */
+body.dark-mode .edit-popup-content {
+  background-color: #2b2b2b;
+  color: #f1f1f1;
+}
+body.dark-mode .edit-close {
+  color: #ccc;
+}
+body.dark-mode .edit-close:hover {
+  color: #fff;
+}
+body.dark-mode .pfp-avatar-wrap {
+  background-color: #333;
+}
+
+/* --- Banner & Footer --- */
+body.dark-mode .banner {
+  background-color: #2a2a2a;
+  border-color: #444;
+}
+body.dark-mode .banner-title {
+  color: #f9f9f9;
+}
+body.dark-mode .site-footer {
+  border-top-color: #444;
+  color: #bbb;
+}
+
+/* --- Modal --- */
+body.dark-mode .modal-content {
+  background-color: #2b2b2b;
+  color: #f9f9f9;
+}
+body.dark-mode .close-btn {
+  color: #ccc;
+}
+body.dark-mode .close-btn:hover {
+  color: #fff;
+}
+
+/* --- 4-Year Plan --- */
+body.dark-mode .semester-card {
+  background-color: #2a2a2a;
+  border-color: #444;
+  color: #e5e5e5;
+}
+body.dark-mode .semester-card.gold {
+  background-color: #9b7f25;
+  color: #fff;
+}
+body.dark-mode .year-header {
+  color: #f1f1f1;
+}
+body.dark-mode .divider-banner {
+  background-color: #9b7f25;
+  color: #fff;
+}
+
+/* --- Undo Button --- */
+body.dark-mode .undo-btn {
+  background-color: #333;
+  border-color: #555;
+  color: #f1f1f1;
+}
+body.dark-mode .undo-btn:hover {
+  background-color: #444;
+}
+
+/* === DARK MODE TOGGLE SWITCH === */
+.darkmode-toggle {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggle-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+  user-select: none;
+}
+
+/* Hide the checkbox */
+.toggle-label input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Slider background */
+.slider {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.3s ease;
+}
+
+/* The circle (toggle knob) */
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+/* When checked */
+.toggle-label input:checked + .slider {
+  background-color: #b89a35;
+}
+
+.toggle-label input:checked + .slider::before {
+  transform: translateX(24px);
+}
+
+/* --- Dark Mode Styling for Toggle --- */
+body.dark-mode .toggle-label {
+  color: #f1f1f1;
+}
+
+body.dark-mode .slider {
+  background-color: #555;
+}
+
+body.dark-mode .toggle-label input:checked + .slider {
+  background-color: #9b7f25;
+}
+
+

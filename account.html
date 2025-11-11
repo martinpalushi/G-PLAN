@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>G-PLAN – Account</title>
   <link rel="stylesheet" href="style.css" />
+  
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("gplan.darkmode") === "true") {
+      document.body.classList.add("dark-mode");
+    }
+  });
+</script>
+  
 </head>
+  
 <body id="top">
   <!-- Top bar -->
   <header class="topbar">
@@ -79,11 +90,19 @@
 
       <p id="pfp-status" class="pfp-status"></p>
     </div>
+    
+    <div class="darkmode-toggle">
+      <label for="darkModeSwitch" class="toggle-label">
+      <input type="checkbox" id="darkModeSwitch" />
+      <span class="slider"></span>
+      Dark Mode
+      </label>
+    </div>
+    
+    
   </div>
 </div>
-  <script src="userdata.js">
-    
-  </script>
-  <script src="pfp.js"></script>
+
+<script src="pfp.js"></script>
 </body>
 </html>
