@@ -1,3 +1,5 @@
+
+
 // PROFILE PICTURE 
 
 // only runs the code after the webpage has finished loading
@@ -9,7 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const editBtn = document.getElementById("edit-tab-btn");
   const popup = document.getElementById("editPopup");
   const closePopup = document.getElementById("closePopup");
-
+  
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  let userbase = JSON.parse(localStorage.getItem("userbase")); // loads userbase to localStorage
+  
   const el = {
     headerAvatar: document.getElementById("pfp-header"),            // profile picture
     headerInitials: document.getElementById("pfp-header-initials"), // initials 
@@ -68,7 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       try {
         const dataUrl = await readAsDataURL(file);
-        localStorage.setItem("gplan.avatar", dataUrl);
+        
+        currentUser.pfp = dataUrl;
+        updateData(currentUser,userbase);
         showPhoto(dataUrl);
         setStatus("Profile photo saved.");
       } catch (err) {
@@ -88,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showPhoto(dataUrl) {
     if (el.avatar) {
-      el.avatar.src = dataUrl;
+      el.avatar.src = currentUser.pfp;
       el.avatar.style.display = "block";
     }
     if (el.initials) el.initials.style.display = "none";
@@ -101,8 +108,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function removePhoto() {
-    localStorage.removeItem("gplan.avatar");
-
+    
+    currentUser.pfp = "";
+    updateData(currentUser,userbase);
+    
     if (el.avatar) {
       el.avatar.src = "";
       el.avatar.style.display = "none";
@@ -123,33 +132,56 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   (function init() {
-    const saved = localStorage.getItem("gplan.avatar");
+    const saved = currentUser.pfp;
     if (saved) {
       showPhoto(saved);
     } else {
       removePhoto();
     }
   })();
+  
+  const username = currentUser.name;
+  const nameDisplay = document.querySelector(".account-name");
+  const initialsDisplay = document.getElementById("pfp-header-initials");
+  
+  // adds username to profile
+  if (username) {
+    nameDisplay.textContent = username;
+    const initials = username.charAt(0).toUpperCase(); // changes the circle to have first initial
+    initialsDisplay.textContent = initials;
+  } else {
+    nameDisplay.textContent = "Guest";
+  }
+  
+  
 });
 
 // Dark Mode
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("darkModeSwitch");
-  const isDark = localStorage.getItem("gplan.darkmode") === "true";
+  let userbase = JSON.parse(localStorage.getItem("userbase")); // loads userbase to localStorage
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const isDark = currentUser.hasDarkMode === "true";
 
   // Apply dark mode if saved
   if (isDark) {
     document.body.classList.add("dark-mode");
     toggle.checked = true;
   }
-
   toggle.addEventListener("change", () => {
     if (toggle.checked) {
       document.body.classList.add("dark-mode");
-      localStorage.setItem("gplan.darkmode", "true");
+      currentUser.hasDarkMode = true;
     } else {
       document.body.classList.remove("dark-mode");
-      localStorage.setItem("gplan.darkmode", "false");
+      currentUser.hasDarkMode = false;
     }
+    updateData(currentUser,userbase);
   });
 });
+
+function updateData(currentUser,userbase){ // Updates the data to the userbase
+  userbase[currentUser.name] = currentUser;
+  localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  localStorage.setItem("userbase",JSON.stringify(userbase));
+}

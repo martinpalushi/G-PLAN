@@ -11,9 +11,7 @@ if(!localStorage.getItem("userbase")){
             hasDarkMode : false, 
             isLoggedIn : true, // a boolean to check if this user is logged in.
             fourYearPlan : {
-                semester1:"stuff1",
-                semester2:"stuff2" // This will be more fleshed out when we figure out
-                             // how to work the four year plan data.
+                
             }
         }
     };

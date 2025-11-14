@@ -5,13 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>G-PLAN • Sign Up</title>
   <link rel="stylesheet" href="style.css" />
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      if (localStorage.getItem("gplan.darkmode") === "true") {
-        document.body.classList.add("dark-mode");
-      }
-    });
-  </script>
+  <script src="darkmode.js"></script>
 </head>
 <body>
   <header class="topbar">
@@ -43,7 +37,7 @@
         <input id="signup-confirm" name="confirm" class="login-info" type="password" placeholder="Re-enter your password" required />
 
         <div class="remember-forgot">
-          <label><input type="checkbox" class="check" /> Remember me</label>
+          <label><input type="checkbox" class="remember" /> Remember me</label>
         </div>
 
         <div class="auth-action">
@@ -67,5 +61,7 @@
       <span>G-PLAN</span>
     </div>
   </footer>
+  
+  <script src="signup.js"></script>
 </body>
 </html>

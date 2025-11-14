@@ -5,13 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>G-PLAN • Log In</title>
   <link rel="stylesheet" href="style.css" />
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      if (localStorage.getItem("gplan.darkmode") === "true") {
-        document.body.classList.add("dark-mode");
-      }
-    });
-  </script>
+  <script src="darkmode.js"></script>
 </head>
 
 <body>
@@ -64,5 +58,6 @@
       <span>G-PLAN</span>
     </div>
   </footer>
+  <script src="login.js"></script>
 </body>
 </html>
