@@ -13,6 +13,7 @@
     });
   </script>
 </head>
+
 <body id="top">
   <header class="topbar">
     <div class="container topbar-row">
@@ -30,7 +31,7 @@
         <img class="logo" src="images/logo.png" alt="G-PLAN logo" />
         <div>
           <h1>MINOR BROWSING</h1>
-          <p class="lead">Look through the minors available!</p>
+          <p class="lead">Select a minor to view its 4-Year Plan</p>
           <div class="btn-row">
             <a class="btn" href="index.html">Home</a>
             <a class="btn" href="majors.html">Browse Majors</a>
@@ -43,59 +44,85 @@
 
     <section class="section">
       <div class="container">
-        <div class="card-slider" id="majors-slider">
-          <article class="card slider-card">
+        <div class="card-slider minor-card">
+          <article class="card slider-card minor-card" data-minor="cybersecurity">
             <div class="media"><img src="images/cyber.jpg" alt="Cybersecurity" /></div>
             <div class="caption">Cybersecurity</div>
           </article>
-          <article class="card slider-card">
+          <article class="card slider-card minor-card" data-minor="ai">
             <div class="media"><img src="images/ai.jpg" alt="Artificial Intelligence" /></div>
             <div class="caption">Artificial Intelligence</div>
           </article>
-          <article class="card slider-card">
+          <article class="card slider-card minor-card" data-minor="bioengineering">
             <div class="media"><img src="images/bioe.jpg" alt="Bioengineering" /></div>
             <div class="caption">Bioengineering</div>
           </article>
-          <article class="card slider-card">
+          <article class="card slider-card minor-card" data-minor="ce">
             <div class="media"><img src="images/ce.jpg" alt="Computer Engineering" /></div>
             <div class="caption">Computer Engineering</div>
           </article>
-          <article class="card slider-card">
+          <article class="card slider-card minor-card" data-minor="computer-science">
             <div class="media"><img src="images/cs.jpg" alt="Computer Science" /></div>
             <div class="caption">Computer Science</div>
           </article>
-          <article class="card slider-card">
+          <article class="card slider-card minor-card" data-minor="ds">
             <div class="media"><img src="images/ds.jpg" alt="Data Science" /></div>
             <div class="caption">Data Science</div>
           </article>
-          <article class="card slider-card">
+          <article class="card slider-card minor-card" data-minor="ee">
             <div class="media"><img src="images/ee.jpg" alt="Electrical Engineering" /></div>
             <div class="caption">Electrical Engineering</div>
           </article>
-          <article class="card slider-card">
+          <article class="card slider-card minor-card" data-minor="es">
             <div class="media"><img src="images/es.jpg" alt="Engineering Sciences" /></div>
             <div class="caption">Engineering Sciences</div>
           </article>
-          <article class="card slider-card">
+          <article class="card slider-card minor-card" data-minor="ise">
             <div class="media"><img src="images/ise.jpg" alt="Industrial and Systems Engineering" /></div>
             <div class="caption">Industrial and Systems Engineering</div>
           </article>
-          <article class="card slider-card">
+          <article class="card slider-card minor-card" data-minor="it">
             <div class="media"><img src="images/it.jpg" alt="Information Technology" /></div>
             <div class="caption">Information Technology</div>
           </article>
-          <article class="card slider-card">
-            <div class="media"><img src="images/me.jpg" alt="Mechanical Engineering" /></div>
-            <div class="caption">Mechanical Engineering</div>
-          </article>
-          <article class="card slider-card">
+          <article class="card slider-card minor-card" data-minor="mre">
             <div class="media"><img src="images/mre.jpg" alt="Mechatronics and Robotics Engineering" /></div>
             <div class="caption">Mechatronics and Robotics Engineering</div>
+          </article>
+          <article class="card slider-card minor-card" data-minor="mechanical-engineering">
+            <div class="media"><img src="images/me.jpg" alt="Mechanical Engineering" /></div>
+            <div class="caption">Mechanical Engineering</div>
           </article>
         </div>
       </div>
     </section>
+
+    <div class="container">
+      <div class="divider-banner">4-YEAR PLAN</div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <h2 id="planMinorName">Select a minor to begin...</h2>
+        <p id="planMinorDesc" class="intro-paragraph"></p>
+        <p>
+          <strong>Total Credits:</strong> <span id="planTotalCredits">0</span>
+          <button id="undoBtn" type="button" class="undo-btn">Undo</button>
+        </p>
+        <div id="planYears"></div>
+      </div>
+    </section>
   </main>
+
+  <div id="courseModal" class="modal">
+    <div class="modal-content">
+      <span id="courseModalClose" class="close-btn">&times;</span>
+      <h3 id="modalCourseCode"></h3>
+      <p id="modalCourseTitle"></p>
+      <p id="modalCourseCredits"></p>
+      <p id="modalCourseDesc"></p>
+    </div>
+  </div>
 
   <section class="section">
     <div class="container">
@@ -111,5 +138,8 @@
       <span>G-PLAN</span>
     </div>
   </footer>
+
+  <script src="minorData.js"></script>
+  <script src="minor.js"></script>
 </body>
 </html>
