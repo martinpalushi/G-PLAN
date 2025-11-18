@@ -46,7 +46,7 @@
         },
         {
           title: "GROUP C",
-          subtitle: "",
+          subtitle: "Pick one course",
           courses: [
             {
               code: "CSE 4460",
@@ -128,7 +128,7 @@
         },
         {
           title: "GROUP C",
-          subtitle: "",
+          subtitle: "Pick one course",
           courses: [
             {
               code: "CSE 4540",
@@ -181,7 +181,7 @@
         },
         {
           title: "GROUP C",
-          subtitle: "",
+          subtitle: "Pick one course",
           courses: [
             { code: "BE 4200", title: "Medical Imaging", credits: 3, desc: "Imaging modalities such as MRI, CT, and ultrasound." },
             { code: "BE 4300", title: "Tissue Engineering", credits: 3, desc: "Scaffolds, cell culture, and regenerative medicine topics." },
@@ -338,3 +338,4 @@
 
   window.MINOR_DATA = MINOR_DATA;
 })();
+
