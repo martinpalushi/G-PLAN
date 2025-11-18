@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>G-PLAN • Major Browsing</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="darkmode.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("gplan.darkmode") === "true") {
+        document.body.classList.add("dark-mode");
+      }
+    });
+  </script>
 </head>
 
 <body id="top">
@@ -20,6 +26,8 @@
   </header>
 
   <main>
+
+
     <section class="section hero">
       <div class="container hero-row">
         <img class="logo" src="images/logo.png" alt="G-PLAN logo" />
@@ -118,7 +126,37 @@
     </div>
   </div>
 
-  <section class="section">
+
+<section class="section">
+  <div class="container">
+    <h2 style="margin-bottom:20px;">COMPARE MAJORS</h2>
+  </div>
+</section>
+
+
+
+<section id="major-comparison" class="section">
+  <div class="container">
+    <div class="card comparison-card-wrap">
+
+      <div class="comparison-selectors" style="align-items:center; margin-top:12px;">
+        <div class="selector-block">
+          <label for="compare-major-1">Select Major 1:</label>
+          <select id="compare-major-1"></select>
+        </div>
+        <div class="selector-block">
+          <label for="compare-major-2">Select Major 2:</label>
+          <select id="compare-major-2"></select>
+        </div>
+      </div>
+      <div id="comparison-result" class="comparison-grid full-plans" style="margin-top:18px;">
+        <div class="comparison-column" id="compare-col-1"></div>
+        <div class="comparison-column" id="compare-col-2"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
     <div class="container">
       <div class="banner">
         <span class="banner-title">Unleash Your Full Potential</span>
@@ -127,7 +165,27 @@
     </div>
   </section>
 
-  <footer class="site-footer">
+
+  <!-- ============================= -->
+  <!-- Major Comparison Section      -->
+  <!-- ============================= -->
+
+
+
+  <!-- ============================= -->
+  <!-- Major Comparison Section (moved above banner) -->
+  <!-- Full side-by-side 4-year plans -->
+  <!-- ============================= -->
+
+
+
+  <!-- ============================= -->
+  <!-- Major Comparison Section (inserted before banner) -->
+  <!-- Full side-by-side 4-year plans -->
+  <!-- ============================= -->
+
+
+<footer class="site-footer">
     <div class="container footer-row">
       <span>G-PLAN</span>
     </div>
