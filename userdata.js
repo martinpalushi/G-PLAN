@@ -10,6 +10,8 @@ if(!localStorage.getItem("userbase")){
             pfp : "images/logo.png",
             hasDarkMode : false, 
             isLoggedIn : true, // a boolean to check if this user is logged in.
+            major : "",
+            minor : "",
             fourYearPlan : {
                 
             }

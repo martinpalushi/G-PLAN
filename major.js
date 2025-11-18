@@ -344,7 +344,8 @@
     if (savedCard) savedCard.classList.add("selected");
     renderMajorPlan(savedSlug);
   }
-  // References elements in the HTML
+
+// References elements in the HTML
 (function () {
   const planMajorName = document.getElementById("planMajorName");
   const planMajorDesc = document.getElementById("planMajorDesc");
@@ -386,7 +387,7 @@
     recomputeTotalCredits();
   }
   undoBtn.addEventListener("click", restoreSnapshot);
-
+    
   // Retrieves and displays the course information
   function openCourseModal(course) {
     document.getElementById("modalCourseCode").textContent = course.code;
@@ -633,7 +634,7 @@ function populateComparisonSelectors() {
   select1.addEventListener('change', ()=> renderComparison());
   select2.addEventListener('change', ()=> renderComparison());
 }
-
+  
 function renderComparison() {
   const m1=document.getElementById('compare-major-1').value;
   const m2=document.getElementById('compare-major-2').value;
@@ -660,6 +661,56 @@ function renderComparison() {
       }).join('');
   });
 }
+  
+// EXTRACTING PLAN DATA FROM HTML
+function extractFullPlan() {
+  const years = [...document.querySelectorAll(".year-block")];
+
+  
+  return years.map((yearBlock) => {
+    const yearTitle = yearBlock.querySelector(".year-title").textContent.trim();
+    const semesters = [...yearBlock.querySelectorAll(".semester-card")].map((sem) => {
+      const semesterTitle = sem.querySelector(".semester-title").textContent.trim();
+      
+      const courses = [...sem.querySelectorAll("li.course")].map((li) => ({
+        code: li.dataset.courseCode,
+        name: li.dataset.courseName,
+        credits: Number(li.dataset.credits),
+        completed: li.querySelector("input[type='checkbox']").checked
+      }));
+        return { semesterTitle, courses };
+    });
+    return { yearTitle, semesters };
+  });
+}
+
+// SAVING PLAN TO USERDATA
+document.getElementById("addMajorBtn")?.addEventListener("click",function(){
+  let userbase = JSON.parse(localStorage.getItem("userbase")) || {};
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  
+  if(!currentUser.name || !userbase[currentUser.name]){
+    alert("You must be logged in to add a major.");
+    return;
+  }
+  const saved={
+    majorName: document.getElementById("planMajorName").textContent.trim(),
+    totalCredits: Number(document.getElementById("planTotalCredits").textContent),
+    plan: extractFullPlan()
+  };
+  userbase[currentUser.name].major = saved.majorName;
+  userbase[currentUser.name].fourYearPlan = saved;
+  currentUser.fourYearPlan = saved;
+  currentUser.major = saved.majorName;
+  localStorage.setItem("userbase", JSON.stringify(userbase));
+  localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  
+  alert("Major added to your account!");
+});
 
 document.addEventListener('DOMContentLoaded', populateComparisonSelectors);
 })();
+
+
+
+
