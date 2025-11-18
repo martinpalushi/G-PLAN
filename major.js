@@ -631,7 +631,9 @@ function populateComparisonSelectors() {
     select2.appendChild(opt2);
     select1.addEventListener('change', ()=> renderComparison());
     select2.addEventListener('change', ()=> renderComparison());
-  }
+  });
+  select1.addEventListener('change', ()=> renderComparison());
+  select2.addEventListener('change', ()=> renderComparison());
 }
 function renderComparison() {
   const m1=document.getElementById('compare-major-1').value;
@@ -708,5 +710,6 @@ document.getElementById("addMajorBtn")?.addEventListener("click",function(){
 
 document.addEventListener('DOMContentLoaded', populateComparisonSelectors);
 })();
+
 
 
