@@ -141,7 +141,10 @@ document.addEventListener("DOMContentLoaded", () => {
   })();
   
   const username = currentUser.name;
+  const major = currentUser.major;
+  const minor = currentUser.minor;
   const nameDisplay = document.querySelector(".account-name");
+  const majorDisplay = document.querySelector("#major-display");
   const initialsDisplay = document.getElementById("pfp-header-initials");
   
   // adds username to profile
@@ -153,6 +156,62 @@ document.addEventListener("DOMContentLoaded", () => {
     nameDisplay.textContent = "Guest";
   }
   
+  if(major){
+    majorDisplay.textContent = "Major: "+major;
+  } 
+
+  // Adds major to profile
+  
+  const saved = userbase[currentUser.name].fourYearPlan;
+  const container = document.getElementById("savedPlanDisplay");
+  if (!saved) {
+    container.innerHTML = "<p>No saved plan yet.</p>";
+    return;
+  }
+
+  // Build plan HTML identical to majors.html
+  const wrapper = document.createElement("div");
+
+  wrapper.innerHTML = `
+    <h3>${saved.majorName}</h3>
+    <p><strong>Total Credits:</strong> ${saved.totalCredits}</p>
+  `;
+  console.log("Saved plan:", saved.plan);
+  
+  saved.plan.forEach((year, idx) => {
+    console.log("Year", idx, year);
+    console.log("Semesters:", year.semesters);
+  });
+  saved.plan.forEach((year) => {
+    const yearBlock = document.createElement("div");
+    yearBlock.className = "year-block";
+
+    yearBlock.innerHTML = `<h3 class="year-title">${year.yearTitle}</h3>`;
+
+    year.semesters.forEach((sem) => {
+      const semCard = document.createElement("div");
+      semCard.className = "semester-card";
+
+      semCard.innerHTML = `<h4 class="semester-title">${sem.semesterTitle}</h4>`;
+
+      const ul = document.createElement("ul");
+      ul.className = "course-list";
+
+      sem.courses.forEach((c) => {
+        const li = document.createElement("li");
+        li.className = "course";
+        li.textContent = `${c.code} — ${c.name} (${c.credits} cr) ${c.completed ? "✓" : ""}`;
+        ul.appendChild(li);
+      });
+
+      semCard.appendChild(ul);
+      yearBlock.appendChild(semCard);
+    });
+
+    wrapper.appendChild(yearBlock);
+  });
+
+  container.appendChild(wrapper);
   
 });
 

@@ -42,12 +42,14 @@ document.querySelector(".auth-form").addEventListener("submit", function(event) 
         pfp : null,
         hasDarkMode:false,
         isLoggedIn:true, // Only the newly-added user would be logged in once created. 
+        major : "",
+        minor : "",
         fourYearPlan:{}
     };
     userbase[username] = newUser;     // adds user to userbase
     
     localStorage.setItem("userbase",JSON.stringify(userbase)); // adds updated userbase back to local storage
-    localStorage.setItem("currentUser", JSON.stringify(newUser)); // saves the user so that they're logged in when they come back
+    localStorage.setItem("currentUser",JSON.stringify(newUser)); // saves the user so that they're logged in when they come back
     
     var getUserbase = localStorage.getItem("userbase");
     
