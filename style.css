@@ -920,3 +920,41 @@ body.dark-mode .toggle-label input:checked + .slider {
 }
 
 
+
+
+/* === Side-by-side Major Comparison Layout === */
+.comparison-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.comparison-column {
+    flex: 1;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.year-block {
+    margin-top: 15px;
+    padding: 15px;
+    background: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.year-block h5 {
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+/* Mobile stacking */
+@media (max-width: 900px) {
+    .comparison-grid {
+        flex-direction: column;
+    }
+}
