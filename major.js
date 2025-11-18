@@ -631,8 +631,8 @@ function populateComparisonSelectors() {
     select2.appendChild(opt2);
     select1.addEventListener('change', ()=> renderComparison());
     select2.addEventListener('change', ()=> renderComparison());
+  }
 }
-
 function renderComparison() {
   const m1=document.getElementById('compare-major-1').value;
   const m2=document.getElementById('compare-major-2').value;
@@ -706,5 +706,7 @@ document.getElementById("addMajorBtn")?.addEventListener("click",function(){
   alert("Major added to your account!");
 });
 
+document.addEventListener('DOMContentLoaded', populateComparisonSelectors);
+})();
 
 
