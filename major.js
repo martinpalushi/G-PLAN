@@ -617,6 +617,19 @@
   });
 })();
 
+// === Major Comparison ===
+function populateComparisonSelectors() {
+  const select1 = document.getElementById('compare-major-1');
+  const select2 = document.getElementById('compare-major-2');
+  if (!select1 || !select2) return;
+
+  Object.keys(majorsData).forEach(key=>{
+    const opt1=document.createElement('option');
+    opt1.value=key; opt1.textContent=majorsData[key].name;
+    const opt2=opt1.cloneNode(true);
+    select1.appendChild(opt1);
+    select2.appendChild(opt2);
+  
 // EXTRACTING PLAN DATA FROM HTML
 function extractFullPlan() {
   const years = [...document.querySelectorAll(".year-block")];
@@ -662,4 +675,5 @@ document.getElementById("addMajorBtn")?.addEventListener("click",function(){
   
   alert("Major added to your account!");
 });
+
 
