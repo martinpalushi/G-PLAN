@@ -629,6 +629,36 @@ function populateComparisonSelectors() {
     const opt2=opt1.cloneNode(true);
     select1.appendChild(opt1);
     select2.appendChild(opt2);
+    select1.addEventListener('change', ()=> renderComparison());
+    select2.addEventListener('change', ()=> renderComparison());
+}
+
+function renderComparison() {
+  const m1=document.getElementById('compare-major-1').value;
+  const m2=document.getElementById('compare-major-2').value;
+  const col1=document.getElementById('compare-col-1');
+  const col2=document.getElementById('compare-col-2');
+  if (!m1||!m2) return;
+  const majors=[m1,m2];
+  [col1,col2].forEach((col,i)=>{
+    const data=majorsData[majors[i]];
+    if(!data) return;
+    col.innerHTML = `<h3>${data.name}</h3>
+      <p><strong>Required Credits:</strong> ${data.requiredCredits}</p>
+      <p>${data.description}</p>` +
+      data.years.map(y=>{
+        return `<h4>${y.title}</h4>
+        <div class='year-block'>
+          <h5>Fall</h5><ul>` +
+            y.fall.map(c=>`<li>${c.code} — ${c.title} (${c.credits} cr)</li>`).join('') +
+          `</ul>
+          <h5>Winter</h5><ul>` +
+            y.winter.map(c=>`<li>${c.code} — ${c.title} (${c.credits} cr)</li>`).join('') +
+          `</ul>
+        </div>`;
+      }).join('');
+  });
+}
   
 // EXTRACTING PLAN DATA FROM HTML
 function extractFullPlan() {
@@ -675,5 +705,6 @@ document.getElementById("addMajorBtn")?.addEventListener("click",function(){
   
   alert("Major added to your account!");
 });
+
 
 
