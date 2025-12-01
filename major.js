@@ -664,53 +664,78 @@ function renderComparison() {
   
 // EXTRACTING PLAN DATA FROM HTML
 function extractFullPlan() {
-  const years = [...document.querySelectorAll(".year-block")];
+  const years = [...document.querySelectorAll(".year-section")];
 
-  
-  return years.map((yearBlock) => {
-    const yearTitle = yearBlock.querySelector(".year-title").textContent.trim();
-    const semesters = [...yearBlock.querySelectorAll(".semester-card")].map((sem) => {
-      const semesterTitle = sem.querySelector(".semester-title").textContent.trim();
-      
-      const courses = [...sem.querySelectorAll("li.course")].map((li) => ({
+  return years.map(yearSection => {
+    const yearName = yearSection.querySelector(".year-header").textContent.trim();
+
+    const semesters = [...yearSection.querySelectorAll(".semester-card")].map(card => {
+      const semName = card.querySelector("h3").textContent.trim();
+
+      const courses = [...card.querySelectorAll("li[data-course-code]")].map(li => ({
         code: li.dataset.courseCode,
-        name: li.dataset.courseName,
         credits: Number(li.dataset.credits),
+        // we must extract the full course name from the <span> text
+        name: li.querySelector(".course-info").textContent
+          .replace(/\s+/g, " ")
+          .trim(),
         completed: li.querySelector("input[type='checkbox']").checked
       }));
-        return { semesterTitle, courses };
+
+      return { semesterTitle: semName, courses };
     });
-    return { yearTitle, semesters };
+
+    return { yearTitle: yearName, semesters };
   });
 }
 
 // SAVING PLAN TO USERDATA
-document.getElementById("addMajorBtn")?.addEventListener("click",function(){
-  let userbase = JSON.parse(localStorage.getItem("userbase")) || {};
-  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  
-  if(!currentUser.name || !userbase[currentUser.name]){
+document.getElementById("addMajorBtn").addEventListener("click", function () {
+  const userbase = JSON.parse(localStorage.getItem("userbase")) || {};
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const username = currentUser.name;
+
+  if (!username || !userbase[username]) {
     alert("You must be logged in to add a major.");
     return;
   }
-  const saved={
-    majorName: document.getElementById("planMajorName").textContent.trim(),
-    totalCredits: Number(document.getElementById("planTotalCredits").textContent),
-    plan: extractFullPlan()
+
+  const majorNameEl = document.getElementById("planMajorName");
+  const creditsEl = document.getElementById("planTotalCredits");
+
+  const savedPlan = {
+    majorName: (majorNameEl && majorNameEl.textContent.trim()) || "Unnamed Major",
+    totalCredits: Number((creditsEl && creditsEl.textContent) || 0),
+    plan: extractFullPlan() || []
   };
-  userbase[currentUser.name].major = saved.majorName;
-  userbase[currentUser.name].fourYearPlan = saved;
-  currentUser.fourYearPlan = saved;
-  currentUser.major = saved.majorName;
+
+  // Save into the userbase object
+  userbase[username].major = savedPlan.majorName;
+  userbase[username].fourYearPlan = savedPlan;
   localStorage.setItem("userbase", JSON.stringify(userbase));
-  localStorage.setItem("currentUser", JSON.stringify(currentUser));
-  
+
+  // Also update currentUser stored entry so profile pages that read it directly will see updates
+  // currentUser might be stored as object or as username string; handle both.
+  const rawCur = localStorage.getItem("currentUser");
+  try {
+    const parsedCur = JSON.parse(rawCur);
+    if (parsedCur && typeof parsedCur === "object") {
+      parsedCur.major = savedPlan.majorName;
+      parsedCur.fourYearPlan = savedPlan;
+      // keep parsedCur.name as-is (must match username)
+      localStorage.setItem("currentUser", JSON.stringify(parsedCur));
+    } else {
+      // stored as a string (username)
+      localStorage.setItem("currentUser", current);
+    }
+  } catch (e) {
+    // not JSON, treat raw as string username
+    localStorage.setItem("currentUser", username);
+  }
+  console.log("Saved userbase for", username, userbase[username]);
   alert("Major added to your account!");
 });
-
+  
 document.addEventListener('DOMContentLoaded', populateComparisonSelectors);
 })();
-
-
-
 

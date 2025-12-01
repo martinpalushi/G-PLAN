@@ -157,6 +157,7 @@ a {
   background: #fff;
   box-shadow: 0 8px 24px rgba(0,0,0,.08);
   overflow: hidden;
+  padding:10px;
 }
 
 .card .media {
@@ -1162,18 +1163,37 @@ body.dark-mode .minor-compare-summary {
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 }
-
+body.dark-mode .comparison-column {
+  background: #1e1e1e;
+}
 .year-block {
   margin-top: 15px;
   padding: 15px;
   background: #fafafa;
   border-radius: 8px;
   border: 1px solid #eee;
+  background-color: #b89a35;
 }
 
 .year-block h5 {
   margin-top: 10px;
   font-weight: 600;
+}
+body.dark-mode .year-block {
+  background: #b89a35;        /* dark card background */
+  border-color: #333;         /* darker border */
+  color: #e5e5e5;             /* readable text */
+}
+
+
+/* Course list inside year blocks */
+body.dark-mode .year-block li {
+  color: #e5e5e5;
+}
+
+/* If checkbox labels are dim: */
+body.dark-mode .year-block input[type="checkbox"] {
+  accent-color: #b89a35;   /* matches your gold branding */
 }
 
 /* Mobile stacking */

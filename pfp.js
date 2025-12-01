@@ -1,5 +1,4 @@
 
-
 // PROFILE PICTURE 
 
 // only runs the code after the webpage has finished loading
@@ -159,60 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if(major){
     majorDisplay.textContent = "Major: "+major;
   } 
-
-  // Adds major to profile
-  
-  const saved = userbase[currentUser.name].fourYearPlan;
-  const container = document.getElementById("savedPlanDisplay");
-  if (!saved) {
-    container.innerHTML = "<p>No saved plan yet.</p>";
-    return;
-  }
-
-  // Build plan HTML identical to majors.html
-  const wrapper = document.createElement("div");
-
-  wrapper.innerHTML = `
-    <h3>${saved.majorName}</h3>
-    <p><strong>Total Credits:</strong> ${saved.totalCredits}</p>
-  `;
-  console.log("Saved plan:", saved.plan);
-  
-  saved.plan.forEach((year, idx) => {
-    console.log("Year", idx, year);
-    console.log("Semesters:", year.semesters);
-  });
-  saved.plan.forEach((year) => {
-    const yearBlock = document.createElement("div");
-    yearBlock.className = "year-block";
-
-    yearBlock.innerHTML = `<h3 class="year-title">${year.yearTitle}</h3>`;
-
-    year.semesters.forEach((sem) => {
-      const semCard = document.createElement("div");
-      semCard.className = "semester-card";
-
-      semCard.innerHTML = `<h4 class="semester-title">${sem.semesterTitle}</h4>`;
-
-      const ul = document.createElement("ul");
-      ul.className = "course-list";
-
-      sem.courses.forEach((c) => {
-        const li = document.createElement("li");
-        li.className = "course";
-        li.textContent = `${c.code} — ${c.name} (${c.credits} cr) ${c.completed ? "✓" : ""}`;
-        ul.appendChild(li);
-      });
-
-      semCard.appendChild(ul);
-      yearBlock.appendChild(semCard);
-    });
-
-    wrapper.appendChild(yearBlock);
-  });
-
-  container.appendChild(wrapper);
-  
 });
 
 // Dark Mode
@@ -220,11 +165,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("darkModeSwitch");
   let userbase = JSON.parse(localStorage.getItem("userbase")); // loads userbase to localStorage
   let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  const isDark = currentUser.hasDarkMode === "true";
+  const isDark = currentUser.hasDarkMode;
 
   // Apply dark mode if saved
   if (isDark) {
-    document.body.classList.add("dark-mode");
     toggle.checked = true;
   }
   toggle.addEventListener("change", () => {
@@ -244,3 +188,94 @@ function updateData(currentUser,userbase){ // Updates the data to the userbase
   localStorage.setItem("currentUser", JSON.stringify(currentUser));
   localStorage.setItem("userbase",JSON.stringify(userbase));
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const userbase = JSON.parse(localStorage.getItem("userbase")) || {};
+  const username = JSON.parse(localStorage.getItem("currentUser")).name;
+  if (!username) return;
+
+  // Update visible major/minor in account header
+  const userRecord = userbase[username];
+  if (userRecord) {
+    const majorDisplay = document.getElementById("major-display");
+    const minorDisplay = document.getElementById("minor-display");
+    if (majorDisplay) majorDisplay.textContent = "Major: " + (userRecord.major || "None");
+    if (minorDisplay) minorDisplay.textContent = "Minor: " + (userRecord.minor || "None");
+  }
+
+  const container = document.getElementById("savedPlanDisplay");
+  if (!container) return;
+
+  const saved = (userRecord && userRecord.fourYearPlan) || null;
+  console.log("Rendering saved plan for", username, saved);
+
+  if (!saved) {
+    container.innerHTML = "<p>No saved plan yet.</p>";
+    return;
+  }
+
+  // Build plan DOM that mirrors majors.html
+  container.innerHTML = ""; // clear
+  const wrapper = document.createElement("div");
+  wrapper.className = "saved-plan-wrapper";
+
+  const headerHtml = document.createElement("div");
+  headerHtml.innerHTML = `<h2 id="planMajorName">${saved.majorName}</h2>
+    <p><strong>Total Credits:</strong> <span id="planTotalCreditsDisplay">${saved.totalCredits}</span></p>`;
+  wrapper.appendChild(headerHtml);
+
+  // For each year -> create .year-block with h3 and semester-cards
+  saved.plan.forEach((yearObj) => {
+    // Defensive: if plan item uses 'year' or 'yearTitle', handle both
+    const yearTitle = yearObj.year || yearObj.yearTitle || yearObj.title || "Year";
+
+    const yearBlock = document.createElement("div");
+    yearBlock.className = "year-block";
+
+    const h3 = document.createElement("h3");
+    h3.textContent = yearTitle;
+    yearBlock.appendChild(h3);
+
+    // semesters might be undefined if saved shape is unexpected; guard
+    const semesters = Array.isArray(yearObj.semesters) ? yearObj.semesters : [];
+
+    semesters.forEach((sem) => {
+      const semName = sem.name || sem.semesterTitle || sem.title || "Semester";
+
+      const semCard = document.createElement("div");
+      semCard.className = "semester-card";
+
+      const h4 = document.createElement("h4");
+      h4.textContent = semName;
+      semCard.appendChild(h4);
+
+      const ul = document.createElement("ul");
+      ul.className = "course-list";
+
+      const courses = Array.isArray(sem.courses) ? sem.courses : [];
+      courses.forEach((c) => {
+        const li = document.createElement("li");
+        li.className = "course";
+        // attach the same data attributes majors.html uses so styles/scripts remain compatible
+        if (c.code) li.dataset.courseCode = c.code;
+        if (c.name) li.dataset.courseName = c.name;
+        if (c.credits != null) li.dataset.credits = String(c.credits);
+
+        // Build innerHTML similarly to majors page (you can tweak markup)
+        li.innerHTML = `<span class="course-code">${c.code || ""}</span>
+                      <span class="course-name">${c.name || ""}</span>
+                      <span class="course-credits">${c.credits != null ? c.credits + " cr" : ""}</span>
+                      <span class="course-completed">${c.completed ? " ✓" : ""}</span>`;
+        ul.appendChild(li);
+      });
+
+      semCard.appendChild(ul);
+      yearBlock.appendChild(semCard);
+    });
+
+    wrapper.appendChild(yearBlock);
+  });
+
+  container.appendChild(wrapper);
+});
+
