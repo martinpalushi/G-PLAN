@@ -261,7 +261,7 @@ const majorsData = {
   },
 
   "ai": {
-    name: "Artificial Itelligence",
+    name: "Artificial Intelligence",
     description:
       "The Bachelor of Artificial Intelligence degree provides students the opportunity to gain cutting-edge AI knowledge and skills with a solid theoretical foundation as well as a good understanding of different application areas. This bachelor program prepares students for a productive career in industry, lifelong learning, and for graduate study in AI. The BS in AI is strategically designed to build on the strengths of existing computing programs on campus and produce well-rounded students with a balance between strong theoretical foundations as well as practical and hands-on technical skills. The program also includes a strong professional component for the development of skills in technical communication, ethics, and teamwork. The program was designed to satisfy the local and national industry needs and student learning perspectives.",
     requiredCredits: 128,
