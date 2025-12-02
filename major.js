@@ -675,7 +675,6 @@ function extractFullPlan() {
       const courses = [...card.querySelectorAll("li[data-course-code]")].map(li => ({
         code: li.dataset.courseCode,
         credits: Number(li.dataset.credits),
-        // we must extract the full course name from the <span> text
         name: li.querySelector(".course-info").textContent
           .replace(/\s+/g, " ")
           .trim(),
@@ -738,4 +737,5 @@ document.getElementById("addMajorBtn").addEventListener("click", function () {
   
 document.addEventListener('DOMContentLoaded', populateComparisonSelectors);
 })();
+
 
