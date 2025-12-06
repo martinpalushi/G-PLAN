@@ -2,7 +2,7 @@
 // Sign-up submission: creates a new user and sets it as current user.
 // Precondition: No users are currently logged in, sign-up is only
 // accessible to signed-out, or "Guest," users.
-document.querySelector(".auth-form").addEventListener("submit", function(event) {
+document.querySelector(".auth-form").addEventListener("submit", function signup(event) {
     event.preventDefault(); // stop the form from reloading the page
 
     const username = document.querySelector("#signup-user").value.trim();

@@ -675,6 +675,7 @@ function extractFullPlan() {
       const courses = [...card.querySelectorAll("li[data-course-code]")].map(li => ({
         code: li.dataset.courseCode,
         credits: Number(li.dataset.credits),
+        // we must extract the full course name from the <span> text
         name: li.querySelector(".course-info").textContent
           .replace(/\s+/g, " ")
           .trim(),
@@ -689,7 +690,7 @@ function extractFullPlan() {
 }
 
 // SAVING PLAN TO USERDATA
-document.getElementById("addMajorBtn").addEventListener("click", function () {
+document.getElementById("addMajorBtn").addEventListener("click", function savePlan() {
   const userbase = JSON.parse(localStorage.getItem("userbase")) || {};
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const username = currentUser.name;
@@ -714,7 +715,7 @@ document.getElementById("addMajorBtn").addEventListener("click", function () {
   localStorage.setItem("userbase", JSON.stringify(userbase));
 
   // Also update currentUser stored entry so profile pages that read it directly will see updates
-  // currentUser might be stored as object or as username string; handle both.
+  // currentUser might be stored as object or as username string; handles both.
   const rawCur = localStorage.getItem("currentUser");
   try {
     const parsedCur = JSON.parse(rawCur);
@@ -737,5 +738,4 @@ document.getElementById("addMajorBtn").addEventListener("click", function () {
   
 document.addEventListener('DOMContentLoaded', populateComparisonSelectors);
 })();
-
 

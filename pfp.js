@@ -189,7 +189,7 @@ function updateData(currentUser,userbase){ // Updates the data to the userbase
   localStorage.setItem("userbase",JSON.stringify(userbase));
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function displayUserPlan() {
   const userbase = JSON.parse(localStorage.getItem("userbase")) || {};
   const username = JSON.parse(localStorage.getItem("currentUser")).name;
   if (!username) return;
@@ -278,4 +278,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
   container.appendChild(wrapper);
 });
-

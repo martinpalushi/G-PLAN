@@ -1,6 +1,6 @@
 
 // Log-in submission: logs a user back in according to the given information.
-document.querySelector(".auth-form").addEventListener("submit",function(event){
+document.querySelector(".auth-form").addEventListener("submit",function login(event){
     event.preventDefault(); // stop the form from reloading the page
     
     const username = document.querySelector("#login-user").value.trim();

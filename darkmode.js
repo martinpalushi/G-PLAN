@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btnleft.textContent = "Profile";
     btnright.setAttribute("href","");
     btnright.textContent = "Log-Out";
-    document.getElementById("btn-right").addEventListener("click", function() {
+    document.getElementById("btn-right").addEventListener("click", function logout() {
       window.location.href = "index.html";
       localStorage.setItem("currentUser",null);
     })();
